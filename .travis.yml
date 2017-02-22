@@ -3,10 +3,13 @@ rvm:
   - 2.4.0
 cache: bundler
 bundler_args: --without production
-
 install:
   - bundle install --path vendor/bundle
   - bundle exec rails db:reset db:migrate RAILS_ENV=test
 script:
   - bundle exec rspec
   - bundle exec rubocop
+branches:
+  only:
+  - master
+
