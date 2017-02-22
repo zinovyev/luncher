@@ -3,6 +3,8 @@ AllCops:
     - '**/Rakefile'
     - '**/config.ru'
   Exclude:
+    - '.bundle/**/*'
+    - 'vendor/bundle/**/*'
     - 'bin/spring'
     - 'db/**/*'
     - 'config/**/*'
@@ -17,4 +19,6 @@ Rails:
 Style/Documentation:
   Enabled: false
 Metrics/LineLength:
+  Enabled: false
+Style/FrozenStringLiteralComment:
   Enabled: false
