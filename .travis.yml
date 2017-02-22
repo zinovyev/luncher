@@ -2,7 +2,7 @@ language: ruby
 rvm:
   - 2.4.0
 cache: bundler
-bundler_args: --without production
+bundler_args: "--without production"
 install:
   - bundle install --path vendor/bundle
   - bundle exec rails db:reset db:migrate RAILS_ENV=test
@@ -12,4 +12,9 @@ script:
 branches:
   only:
   - master
-
+deploy:
+  provider: heroku
+  api_key:
+    secure: tZCdS01+hbcwOugclj+XtP4MS7nECFsjwIQt56m/C0Ou7kc9sWcb5iOWA4Qx/icJnxEn5wuDC43BN4h6c32TQxSU/hVZuGW6C9z693Tuxg4tCkCvVD4u85iJTX19YaCvn5Cj6cvnG+1q6ErBbycQ1UbmF5IcjwjxmbZBOSLYN7aJSUwe/G2dnr99618zBFh4blm8iq88VQum52SZ3dDER5ryB9YAlPRis/gL7LCNnG/oYRIHUwLBb/roI3Y13gxPvA6U7CM1SVMh2xmrC3y9Mxxc9pm+k443znrMC/UxMiu7Wq7WWgoIrQbi8krkzTIlPj7f3xUT16lI+bWwZF0Xq4kNbMAt5YqXk+WaU7xtbyecMJGhsUOpXqmi2tBdxaQELQMWr+VfbrQw0DeBrmDtoxblz/s9rDj26cvRwHamzO6LiW2h+uIxThSBCmitxkmawzYB9v4dshnnMyJ/ybUj3y8L0JGNTYXf6CKM2n5uDyIA52s3SSjoodG8xKHG4MCq9HVQ0R3sGengz5+Jqv+miiLMS8Z1YZFhmE8pGajqy9X9hcStZh7CHtb37Kmms03TqoHFW6z40g/afOmE7rAclTni8boGfQxyO9lFIFtPKMGRYQbtN4eLA0OSfydgz0S3JJ893ZygXi7OOnH6bNJQf0WsWQkWwykkWxcZI44BeFg=
+  app: zluncher
+  run: "bundle exec rails db:migrate"
