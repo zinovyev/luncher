@@ -43,6 +43,7 @@ group :development, :test do
   gem 'rubocop', '~> 0.47.1'
   gem 'rspec-rails', '~> 3.5', '>= 3.5.2'
   gem 'capybara', '~> 2.12', '>= 2.12.1'
+  gem 'factory_girl', '~> 4.8'
 end
 
 group :development do

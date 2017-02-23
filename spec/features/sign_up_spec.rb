@@ -16,7 +16,7 @@ describe 'the sign up process' do
     end
     click_on 'Sign Up'
 
-    expect(page).to have_path(user_path(current_user))
+    expect(current_path).to match(/\/users\/\d+/)
     expect(page).to have_content('Hello, John')
   end
 end
