@@ -10,7 +10,7 @@ describe 'the sign up process' do
     # session = Capybara::Session.new
     within('form#new_user') do
       fill_in 'Name', with: 'John'
-      fill_in 'Login', with: 'johnsmith'
+      fill_in 'Username', with: 'johnsmith'
       fill_in 'Email', with: 'john@smith.com'
       fill_in 'Password', with: 'password'
     end
