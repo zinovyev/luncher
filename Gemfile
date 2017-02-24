@@ -45,6 +45,8 @@ group :development, :test do
   gem 'capybara', '~> 2.12', '>= 2.12.1'
   gem 'factory_girl_rails', '~> 4.8'
   gem 'faker', '~> 1.7', '>= 1.7.3'
+  gem 'pry-rails', '~> 0.3.5'
+  gem 'pry-byebug', '~> 3.4', '>= 3.4.2'
 end
 
 group :development do
