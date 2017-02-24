@@ -1,3 +1,4 @@
-%h1 Welcome to Luncher!
-%a{id: 'login_main', href: "#{new_user_session_path}"} 
-%a{id: 'sign_up_main', href: "#{new_user_registration_path}"} 
+.jumbotron
+  %h1 Welcome to Luncher!
+  %a{id: 'login_main', href: "#{new_user_session_path}", class: 'btn btn-primary btn-lg'} Log In
+  %a{id: 'sign_up_main', href: "#{new_user_registration_path}", class: 'btn btn-success btn-lg'} Sign Up

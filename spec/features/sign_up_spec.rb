@@ -7,12 +7,12 @@ describe 'the sign up process' do
 
     expect(page).to have_current_path('/user/sign_up')
 
-    # session = Capybara::Session.new
+    user = attributes_for(:user)
     within('form#new_user') do
-      fill_in 'Name', with: 'John'
-      fill_in 'Username', with: 'johnsmith'
-      fill_in 'Email', with: 'john@smith.com'
-      fill_in 'Password', with: 'password'
+      fill_in 'Name', with: user[:name]
+      fill_in 'Username', with: user[:name]
+      fill_in 'Email', with: user[:email] 
+      fill_in 'Password', with: user[:password] 
     end
     click_on 'Sign Up'
 
