@@ -2,6 +2,10 @@
   .container-fluid
     .navbar-header
       %a{class: 'navbar-brand', href: "#{root_path}"} Luncher
+      - if lunches_admin?
+        .navbar-text
+          %b 
+            (Lunches Admin)
     .navbar-text{class: 'navbar-right'}
       - if signed_in?
         Logged in as #{current_user.username}
