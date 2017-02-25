@@ -58,3 +58,10 @@ describe 'log out action' do
     expect(page).to have_no_content("Logged in as #{user.username}")
   end
 end
+
+describe 'dashboard protection from unauthorized users' do
+  it 'should redirect unauthorized user to the root path' do
+    visit dashboard_path
+    expect(page).to have_current_path(new_user_session_path)
+  end
+end
