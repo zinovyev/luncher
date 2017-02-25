@@ -10,11 +10,11 @@ RSpec.describe User, type: :model do
     expect(first_user.lunches_admin?).to eq true
 
     second_user = build(:user)
-    expect(second_user.send(:admin_exists?)).to eq true 
+    expect(second_user.send(:admin_exists?)).to eq true
     expect(second_user.lunches_admin?).to eq false
     second_user.save
     expect(second_user.valid?).to eq true
-    expect(second_user.lunches_admin?).to eq false 
+    expect(second_user.lunches_admin?).to eq false
   end
 
   it 'should not pass with wrong paramteres' do

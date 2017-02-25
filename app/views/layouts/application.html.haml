@@ -7,5 +7,7 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
     = render 'layouts/navbar'
-    .container-fluid= yield
+    .container-fluid
+      = render 'layouts/flash'
+      = yield
     = render 'layouts/footer'

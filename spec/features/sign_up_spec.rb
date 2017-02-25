@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'the sign up process' do
-  it 'signs me up' do
+  it 'signs me up when data is correct' do
     visit root_path
     find_link(id: 'sign_up_main').click
 
@@ -11,12 +11,13 @@ describe 'the sign up process' do
     within('form#new_user') do
       fill_in 'Name', with: user[:name]
       fill_in 'Username', with: user[:name]
-      fill_in 'Email', with: user[:email] 
-      fill_in 'Password', with: user[:password] 
+      fill_in 'Email', with: user[:email]
+      fill_in 'Password', with: user[:password]
+      fill_in 'Password confirmation', with: user[:password]
     end
     click_on 'Sign Up'
 
-    expect(current_path).to match(/\/users\/\d+/)
-    expect(page).to have_content('Hello, John')
+    expect(page).to have_current_path(dashboard_path)
+    expect(page).to have_content("Hello, #{user[:name]}")
   end
 end

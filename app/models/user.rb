@@ -10,12 +10,10 @@ class User < ApplicationRecord
   private
 
   def become_admin
-    unless admin_exists?
-      self.lunches_admin = true
-    end 
+    self.lunches_admin = true unless admin_exists?
   end
 
   def admin_exists?
-    User.where(lunches_admin: true).count > 0
+    User.where(lunches_admin: true).count.positive?
   end
 end
