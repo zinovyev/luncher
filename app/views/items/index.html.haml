@@ -1,4 +1,9 @@
 %h1 Items
 
+- @items.each do |item|
+  %div{class: 'panel panel-default'}
+    %div{class: 'panel-heading'}= item.title
+    %div{class: 'panel-body'}= "Course: #{item.course}"
+
 = link_to 'Create New Item', new_item_path, class: 'btn btn-default btn-lg'
 %br
