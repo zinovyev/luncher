@@ -1,4 +1,4 @@
 class Price < ApplicationRecord
-  has_one :item
+  belongs_to :item
   has_many :orders
 end
