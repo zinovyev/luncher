@@ -10,10 +10,13 @@ describe 'add today prices process' do
     create_list(:item_with_today_prices, 5, prices_count: 1)
 
     visit prices_path
-  end
+    expect(page).to have_current_path(prices_path)
+    expect(page).to have_content('Today Menu')
+    page.assert_selector('.price-row', count: 5)
 
-  it 'lets me to add new prices for items from menu' do
+    find_link('Add New Price').click
 
+    expect(page).to have_current_path(new_price_path)
   end
 
   it 'lets me to delete or modify a price' do
