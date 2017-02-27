@@ -10,7 +10,7 @@ class Price < ApplicationRecord
     private
 
     def today
-      @today ||= Date.today
+      @today ||= Time.zone.today
     end
   end
 end

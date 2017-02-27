@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :item do
-    course { (rand() * 3).to_i }
+    course { (rand * 3).to_i }
     title { course == 2 ? Faker::Beer.name : Faker::Food.ingredient }
     photo nil
 
