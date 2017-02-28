@@ -13,12 +13,27 @@ describe 'add today prices process' do
     expect(page).to have_current_path(prices_path)
     expect(page).to have_content('Today Menu')
     page.assert_selector('.price-row', count: 5)
+  end
 
+  it 'lets me delete or modify a price' do
+    user = create(:user)
+    sign_in user
+
+    items = create_list(:item_with_prices, 55, prices_count: 5)
+    price = build(:price)
+
+    visit prices_path
     find_link('Add New Price').click
 
     expect(page).to have_current_path(new_price_path)
-  end
+    expect(page).to have_content('New Price')
 
-  it 'lets me to delete or modify a price' do
+    within('form#new_price') do
+      select items.first.title, from: 'Item'
+      fill_in 'Price', with: price.value
+    end
+    click_on 'Add price'
+
+    expect(page).to have_current_path(prices_path)
   end
 end
