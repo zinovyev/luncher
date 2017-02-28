@@ -30,9 +30,9 @@ describe 'add today prices process' do
 
     within('form#new_price') do
       select items.first.title, from: 'Item'
-      fill_in 'Price', with: price.value
+      fill_in 'Value', with: price.value
     end
-    click_on 'Add price'
+    click_on 'Create Price'
 
     expect(page).to have_current_path(prices_path)
   end

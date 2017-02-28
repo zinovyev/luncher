@@ -1,6 +1,8 @@
 class ItemsController < ApplicationController
   include RequireAdminConcern
 
+  before_action :convert_course, only: :create 
+
   def index
     @items = Item.all
   end
@@ -10,19 +12,18 @@ class ItemsController < ApplicationController
   end
 
   def create
-    item = Item.new(item_params)
-    if item.save
+    @item = Item.new(item_params)
+    if @item.save
       flash[:success] = 'Item successfully created!'
       redirect_to items_path
     else
-      render new
+      render :new
     end
   end
 
   private
 
   def item_params
-    convert_course
     params.require(:item).permit(:title, :photo, :course)
   end
 
