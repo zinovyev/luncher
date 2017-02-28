@@ -4,14 +4,11 @@ class Price < ApplicationRecord
 
   # TODO add to migration
   before_save :update_date
-  # def initialize
-    # date = Date.today
-  # end
 
   private
 
   def update_date
-    date = Date.today
+    self.date ||= Time.zone.today
   end
 
   class << self
@@ -26,7 +23,7 @@ class Price < ApplicationRecord
     private
 
     def taken_item_ids
-      Price.select('item_id').where('date >= :date', { date: Date.today }).map { |p| p.item_id }
+      Price.select('item_id').where('date >= :date', { date: today }).map { |p| p.item_id }
     end
 
     def today
