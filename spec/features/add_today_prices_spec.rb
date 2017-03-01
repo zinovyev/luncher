@@ -36,6 +36,7 @@ describe 'add today prices process' do
 
     expect(page).to have_current_path(prices_path)
     expect(page).to have_content('Price successfully created')
+
     page.assert_selector('.price-row', count: 1)
   end
 end

@@ -13,18 +13,15 @@ class Price < ApplicationRecord
 
   class << self
     def for_today
-      where(date: today)
+      where('date >= :today', { today: today })
     end 
    
     def available_items
+      taken_item_ids = for_today.map { |p| p.item_id }
       Item.where.not(id: taken_item_ids)
     end
 
     private
-
-    def taken_item_ids
-      Price.select('item_id').where('date >= :date', { date: today }).map { |p| p.item_id }
-    end
 
     def today
       @today ||= Time.zone.today
