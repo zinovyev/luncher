@@ -2,7 +2,7 @@ class Price < ApplicationRecord
   belongs_to :item
   has_many :orders
 
-  # TODO add to migration
+  # TODO: add to migration
   before_save :update_date
 
   private
@@ -13,11 +13,11 @@ class Price < ApplicationRecord
 
   class << self
     def for_today
-      where('date >= :today', { today: today })
-    end 
-   
+      where('date >= :today', today: today)
+    end
+
     def available_items
-      taken_item_ids = for_today.map { |p| p.item_id }
+      taken_item_ids = for_today.map(&:item_id)
       Item.where.not(id: taken_item_ids)
     end
 

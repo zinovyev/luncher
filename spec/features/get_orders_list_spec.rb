@@ -7,5 +7,5 @@ describe 'orders page in admin panel' do
     sign_in user
 
     visit orders_path
-  end    
+  end
 end

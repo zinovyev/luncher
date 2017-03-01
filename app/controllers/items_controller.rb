@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   include RequireAdminConcern
 
-  before_action :convert_course, only: :create 
+  before_action :convert_course, only: :create
 
   def index
     @items = Item.all
