@@ -1,4 +1,4 @@
-module DateTime
+module Calendar
   class Calendar
     def get_number_of_days(d = nil)
       d ||= now_date

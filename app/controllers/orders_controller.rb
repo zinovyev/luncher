@@ -1,3 +1,5 @@
+require 'calendar/calendar'
+
 class OrdersController < ApplicationController
   def index
     @days = calendar.get_number_of_days
@@ -6,6 +8,6 @@ class OrdersController < ApplicationController
   private
 
   def calendar
-    @calendar ||= Calendar::Calendar
+    @calendar ||= Calendar::Calendar.new
   end
 end
