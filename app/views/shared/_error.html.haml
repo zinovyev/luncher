@@ -1,0 +1,6 @@
+- if object.errors.count.positive?
+  %div{class: 'panel panel-danger'}
+    .panel-heading Errors occured
+    %ul{class: 'list-group'}
+      - object.errors.full_messages.each do |msg|
+        .panel-group-item= msg

@@ -7,4 +7,8 @@ Rails.application.routes.draw do
   match 'sign_up', to: 'devise/registrations#new', via: :get
   
   get 'dashboard', to: 'users#dashboard'
+
+  resources :orders
+  resources :items
+  resources :prices
 end
