@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'dashboard/:date/new', to: 'orders#new', as: :new_order
 
   resources :orders, except: [:new]
+  post 'orders/select_price', to: 'orders#select_price'
   resources :items
   resources :prices
 end
