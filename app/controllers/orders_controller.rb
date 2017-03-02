@@ -10,7 +10,8 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new
     @date = Date.parse params[:date]
-    @prices = Price.available_items(@date)
+    @prices = Price.for_today(@date)
+    puts @prices.count
     raise 'No prices available' if @prices.empty? 
   rescue
     redirect_to dashboard_path
