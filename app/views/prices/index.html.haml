@@ -16,5 +16,4 @@
           %td= price.item.course
           %td= price.value
           %td= price.date
-%a{href: new_price_path} Add New Price
-
+= link_to 'Add New Price', new_price_path, class: 'btn btn-default'
