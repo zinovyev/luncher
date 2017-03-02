@@ -1,0 +1,18 @@
+- group_menu(prices).each do |course, prices|
+  %div{class: 'panel panel-default'}
+    %div{class: 'panel-heading'}
+      Menu Items For #{Item.course_name(course)}
+    %table{class: 'table table-striped'}
+      %thead
+        %tr
+          %td Title
+          %td Course
+          %td Price
+          %td Date
+      %tbody
+        - prices.each do |price|
+          %tr{class: 'price-row'}
+            %td= price.item.title
+            %td= price.item.course
+            %td= price.value
+            %td= price.date
