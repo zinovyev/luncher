@@ -11,7 +11,7 @@
           - if day
             - if day.prices.count.positive?
               %td{class: 'success'}
-                %a{href: '', style: 'display: block'}= day.day 
+                %a{href: "#{new_order_path(day.date)}", style: 'display: block'}= day.day
             - else
               %td= day.day
           - else

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   match 'sign_up', to: 'devise/registrations#new', via: :get
   
   get 'dashboard', to: 'users#dashboard'
-  get 'dashboard/:date/new', to: 'orders#new'
+  get 'dashboard/:date/new', to: 'orders#new', as: :new_order
 
   resources :orders, except: [:new]
   resources :items

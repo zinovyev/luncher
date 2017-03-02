@@ -9,7 +9,7 @@ module Calendar
     end
 
     def date
-      @date ||= Date.new(@year, @month, @date)
+      Date.new(@year, @month, @day)
     end
 
     def prices
