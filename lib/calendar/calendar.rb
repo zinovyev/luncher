@@ -9,9 +9,9 @@ module Calendar
     end
 
     def paginate(page = nil)
-      if page.is_a?(Integer)
+      if page.is_a?(Integer) && page.positive?
         page = page > 1 ? page - 1 : 0
-        self.date = self.date << page
+        self.date = self.date >> page
       end 
       self
     end
