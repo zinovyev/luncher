@@ -4,7 +4,11 @@ class OrdersController < ApplicationController
   include RequireAdminConcern
 
   def index
-    @days = calendar.get_number_of_days
+    # @days = calendar.get_number_of_days
+  end
+
+  def new
+    @order = Order.new
   end
 
   private

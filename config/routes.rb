@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   
   get 'dashboard', to: 'users#dashboard'
 
-  resources :orders
+  resources :orders, except: [:new]
   resources :items
   resources :prices
+
+  # get 'users/dashboard/:date/new', to: 'orders#new'
 end
