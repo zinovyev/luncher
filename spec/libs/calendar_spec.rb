@@ -31,7 +31,7 @@ RSpec.describe Calendar::Calendar do
   end
 
   it 'should be able to paginate backwards and forwards' do
-    expect(c1.paginate(-1).date).to be == Date.new(2016, 12, 1) 
+    expect(c1.paginate(-1).date).to be == Date.new(2016, 12, 1)
     expect(c1.paginate(-2).date).to be == Date.new(2016, 10, 1)
     expect(c1.paginate(4).date).to be == Date.new(2017, 1, 1)
   end

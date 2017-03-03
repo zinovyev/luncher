@@ -9,7 +9,7 @@ RSpec.describe AggregateHelper, type: :helper do
       prices = helper.group_hash(Price.all) { |price| price.item.course.to_sym }
       expect(prices[:main_course].count).to eq 12
       expect(prices[:drink].count).to eq 15
-      expect(prices[:first_course].count).to eq 6 
+      expect(prices[:first_course].count).to eq 6
     end
   end
 
@@ -21,7 +21,7 @@ RSpec.describe AggregateHelper, type: :helper do
       prices = helper.group_menu(Price.all)
       expect(prices[:main_course].count).to eq 12
       expect(prices[:drink].count).to eq 15
-      expect(prices[:first_course].count).to eq 6 
+      expect(prices[:first_course].count).to eq 6
     end
   end
 end
