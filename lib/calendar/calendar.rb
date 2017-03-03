@@ -9,8 +9,8 @@ module Calendar
     end
 
     def paginate(page = nil)
-      if page.is_a?(Integer) && page.positive?
-        page = page > 1 ? page - 1 : 0
+      if page.to_i
+        page = normalize_page(page)    
         self.date = self.date >> page
       end 
       self
@@ -48,6 +48,10 @@ module Calendar
     end
 
     private
+
+    def normalize_page(page)
+      page = page > 0 ? page - 1 : page
+    end
 
     def normalize_date(date)
       Date.new(date.year, date.month, 1)
