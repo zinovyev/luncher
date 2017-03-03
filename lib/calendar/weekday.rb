@@ -15,7 +15,7 @@ module Calendar
     def prices
       @prices ||= Price.where(
         'date = :date',
-        { date: "#{year}-#{month}-#{day}" }
+        date: "#{year}-#{month}-#{day}"
       )
     end
   end
