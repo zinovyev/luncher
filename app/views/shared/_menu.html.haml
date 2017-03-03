@@ -25,5 +25,5 @@
                   = submit_tag('Add To Order', class: 'btn btn-primary')
                 -# = link_to 'Add To Order', select_price_path(order_id: order, price_id: price), method: :post
               - elsif lunches_admin?
-                = link_to 'Delete', destroy_price_path(price)
+                = link_to 'Delete', price_path(price), method: :delete, class: 'btn btn-danger'
 
