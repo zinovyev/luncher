@@ -14,6 +14,22 @@ FactoryGirl.define do
       end
     end
 
+    factory :item_with_date_prices do
+      transient do
+        prices_count 5
+        prices_date Time.zone.today
+      end
+
+      after(:create) do |item, evaluator|
+        create_list(
+          :price,
+          evaluator.prices_count,
+          date: evaluator.prices_date,
+          item: item
+        )
+      end
+    end
+
     factory :item_with_today_prices do
       transient do
         prices_count 5

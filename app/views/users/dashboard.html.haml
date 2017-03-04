@@ -1,5 +1,5 @@
-%h1= "Hello, #{current_user.name} (#{@calendar.date.year} #{@calendar.date.month})"
-%table{class: 'table table-striped table-hover text-center'}
+%h1= "Hello, #{current_user.name} (#{@calendar.month_title})"
+%table{class: 'table table-striped table-hover text-center dashboard-calendar'}
   %thead
     %tr
       - @calendar.days_table_header.each do |day|

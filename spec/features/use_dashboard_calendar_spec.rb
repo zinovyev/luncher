@@ -9,10 +9,39 @@ describe 'dashboard calendar' do
     user
   end
 
-  it 'it shows me the calendar page' do
+  let!(:items) do
+    items = create_list(
+      :item_with_date_prices,
+      1,
+      prices_count: 15,
+      prices_date: Date.new(2016, 12, 01)
+    )
+  end
 
+  before(:each) do
+    def Date.today
+      Date.new(2017, 1, 1)
+    end
+
+    zone = Time.zone
+    def zone.today
+      Date.today
+    end
+  end
+
+  it 'it shows me the calendar page' do
+    visit root_path
+    expect(page).to have_current_path(dashboard_path)
+   
+    expect(page).to have_content('2017 Jan') 
+    expect(page).to have_selector('table.dashboard-calendar')
+
+    find_link('Prev').click
+    expect(page).to have_content('2016 Dec')
+    expect(page).to have_xpath('//table/tbody/tr[1]/td[5]/a[@href="/dashboard/2016-12-01/new"]')
   end
 
   it 'let\'s me to create a new order'
   it 'shows me my order on the calendar page'
 end
+

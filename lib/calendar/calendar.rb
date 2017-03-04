@@ -48,6 +48,10 @@ module Calendar
     end
     # rubocop:enable Metrics/AbcSize
 
+    def month_title
+      date.strftime('%Y %b')
+    end
+
     private
 
     def normalize_page(page)
