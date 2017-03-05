@@ -21,9 +21,7 @@ class OrdersController < ApplicationController
     price = Price.find select_price_params[:price_id]
     @order = get_order Date.parse params[:date]
     @order.add_course price
-    unless @order.save
-      flash[:danger] = 'Could not save the order!'
-    end
+    flash[:danger] = 'Could not save the order!' unless @order.save
 
     redirect_to new_order_path @order.created_date
   end

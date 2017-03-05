@@ -7,11 +7,11 @@ class Order < ApplicationRecord
   def add_course(price)
     case price.item.course
     when 'first_course'
-      self.first_course = toggle_course(self.first_course, price)
+      self.first_course = toggle_course(first_course, price)
     when 'main_course'
-      self.main_course = toggle_course(self.main_course, price)
+      self.main_course = toggle_course(main_course, price)
     when 'drink'
-      self.drink = toggle_course(self.drink, price)
+      self.drink = toggle_course(drink, price)
     end
   end
 
@@ -24,7 +24,7 @@ class Order < ApplicationRecord
           OR drink_id = :price_id \
       ) AND id = :order_id",
       price_id: price.id,
-      order_id: self.id
+      order_id: id
     ).count.positive?
   end
 
@@ -33,11 +33,11 @@ class Order < ApplicationRecord
   end
 
   def summary
-    '%.2f' % (
+    format('%.2f', (
       first_course&.value.to_f +
       main_course&.value.to_f +
       drink&.value.to_f
-    )
+    ).to_s)
   end
 
   private

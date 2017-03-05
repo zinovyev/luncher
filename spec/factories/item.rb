@@ -1,8 +1,11 @@
 FactoryGirl.define do
   factory :item do
     course { (rand * 3).to_i }
-    title { course == 2 ? Faker::Beer.name : Faker::Food.ingredient }
     photo nil
+    sequence(:title) do |n|
+      name = (course == 2 ? Faker::Beer.name : Faker::Food.ingredient)
+      "#{name}-#{n}"
+    end
 
     factory :item_with_prices do
       transient do
