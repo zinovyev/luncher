@@ -1,0 +1,5 @@
+%h1 New Order (#{@order.summary})
+= link_to 'To Dashboard', dashboard_path, class: 'btn btn-primary'
+= render 'shared/error', object: @order
+= render 'shared/menu', prices: @prices, order: @order
+
