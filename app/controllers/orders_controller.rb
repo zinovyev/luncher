@@ -3,6 +3,8 @@ require 'calendar/calendar'
 class OrdersController < ApplicationController
   include RequireAdminConcern
 
+  before_action :require_admin, except: [:new, :select_price]
+
   def index
   end
 
@@ -16,16 +18,15 @@ class OrdersController < ApplicationController
   end
 
   def select_price
-    order = Order.find(price_to_order_params[:order_id])
-    price = Price.find(price_to_order_params[:price_id])
-    if order && price
-      order.add_course price
-      order.save
-      redirect_to new_order_path(date: order.created_date)
-    else
-      flash[:danger] = 'Order Or Price Not Found!'
-      redirect_to dashboard_path
+    price = Price.find price_to_order_params[:price_id]
+    @order = get_order Date.parse params[:date]
+    @order.add_course price
+    unless @order.save
+      flash[:danger] = 'Could not save the order!'
+      binding.pry
     end
+
+    redirect_to new_order_path @order.created_date
   end
 
   private

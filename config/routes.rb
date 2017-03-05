@@ -8,9 +8,11 @@ Rails.application.routes.draw do
   
   get 'dashboard', to: 'users#dashboard'
   get 'dashboard/:date/new', to: 'orders#new', as: :new_order
+  post 'dashboard/:date/select_price',
+    to: 'orders#select_price',
+    as: :orders_select_price
 
   resources :orders, except: [:new]
-  post 'orders/select_price', to: 'orders#select_price'
   resources :items
   resources :prices
 end

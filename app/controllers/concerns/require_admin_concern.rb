@@ -2,7 +2,7 @@ module RequireAdminConcern
   extend ActiveSupport::Concern
 
   included do
-    before_action :require_admin
+     before_action :require_admin
   end
 
   private
