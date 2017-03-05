@@ -3,7 +3,7 @@ require 'calendar/calendar'
 class OrdersController < ApplicationController
   include RequireAdminConcern
 
-  before_action :require_admin, except: [:new, :select_price]
+  before_action :require_admin, only: [:index]
 
   def index
   end
@@ -18,12 +18,11 @@ class OrdersController < ApplicationController
   end
 
   def select_price
-    price = Price.find price_to_order_params[:price_id]
+    price = Price.find select_price_params[:price_id]
     @order = get_order Date.parse params[:date]
     @order.add_course price
     unless @order.save
       flash[:danger] = 'Could not save the order!'
-      binding.pry
     end
 
     redirect_to new_order_path @order.created_date
@@ -38,7 +37,7 @@ class OrdersController < ApplicationController
     ).first || Order.create(user: current_user, created_at: date)
   end
 
-  def price_to_order_params
+  def select_price_params
     @order_params ||= params.permit(:price_id, :order_id)
   end
 

@@ -12,7 +12,7 @@
           %td Actions
       %tbody
         - prices.each do |price|
-          %tr{class: "price-row #{'success' if order && order.contains_course(price)}"}
+          %tr{class: "price-row #{'info' if order && order.contains_course(price)}"}
             %td= price.item.title
             %td= price.item.course
             %td= price.value

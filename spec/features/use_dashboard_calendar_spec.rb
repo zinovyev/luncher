@@ -10,12 +10,29 @@ describe 'dashboard calendar' do
   end
 
   let!(:items) do
-    items = create_list(
+    items1 = create_list(
       :item_with_date_prices,
-      1,
-      prices_count: 15,
+      5,
+      course: Item::FIRST_COURSE,
+      prices_count: 1,
       prices_date: Date.new(2016, 12, 01)
     )
+
+    items2 = create_list(
+      :item_with_date_prices,
+      5,
+      course: Item::MAIN_COURSE,
+      prices_count: 1,
+      prices_date: Date.new(2016, 12, 01)
+    )
+    items3 = create_list(
+      :item_with_date_prices,
+      5,
+      course: Item::DRINK,
+      prices_count: 1,
+      prices_date: Date.new(2016, 12, 01)
+    )
+    items1 + items2 + items3
   end
 
   before(:each) do
@@ -43,19 +60,32 @@ describe 'dashboard calendar' do
     find_link('1').click
     expect(page).to have_current_path(new_order_path('2016-12-01'))
 
-    find(:xpath, '(//input[@type="submit" and @value="Add To Order"])[1]').click()
+    button_selector = '//input[@type="submit" and @value="Add To Order"]'
+    expect(page).to have_selector(:xpath, button_selector, count: 15)
+
+    find(:xpath, "(#{button_selector})[2]").click()
+    expect(page).to have_current_path(new_order_path('2016-12-01'))
+    find(:xpath, "(#{button_selector})[6]").click()
+    expect(page).to have_current_path(new_order_path('2016-12-01'))
+    find(:xpath, "(#{button_selector})[14]").click()
     expect(page).to have_current_path(new_order_path('2016-12-01'))
 
-    # expect(page).to have_xpath('//tr[contains(@class, "selected-item")]')
+    expect(page).to have_selector(
+      :xpath,
+      "#{button_selector}/ancestor::tr[contains(@class, 'info')]",
+      count: 3
+    )
+
+    order_summary = '%.2f' % (
+      items[1].prices.first.value +
+      items[5].prices.first.value +
+      items[13].prices.first.value
+    )
+    expect(page).to have_content("(#{order_summary})")
+
+    find_link('To Dashboard').click
+    expect(page).to have_current_path(dashboard_path)
   end
-
-  it 'let\'s me to create a new order' do
-    # find_link('1').click
-  end
-
-
-  it 'shows me my order on the calendar page'
-
 end
 
 

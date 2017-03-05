@@ -32,6 +32,14 @@ class Order < ApplicationRecord
     created_at.to_datetime.to_date
   end
 
+  def summary
+    '%.2f' % (
+      first_course&.value.to_f +
+      main_course&.value.to_f +
+      drink&.value.to_f
+    )
+  end
+
   private
 
   def toggle_course(course, price)
