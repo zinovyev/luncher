@@ -12,16 +12,16 @@
           %td Actions
       %tbody
         - prices.each do |price|
-          %tr{class: "price-row #{'success' if @order.contains_course(price)}"}
+          %tr{class: "price-row #{'success' if order && order.contains_course(price)}"}
             %td= price.item.title
             %td= price.item.course
             %td= price.value
             %td= price.date
             %td
-              - if @order
+              - if order
                 = form_tag(orders_select_price_path, name: 'select_price', method: :post) do
                   = hidden_field_tag(:price_id, price.id)
-                  = hidden_field_tag(:order_id, @order.id)
+                  = hidden_field_tag(:order_id, order.id)
                   = submit_tag('Add To Order', class: 'btn btn-primary')
               - elsif lunches_admin?
                 = link_to 'Delete', price_path(price), method: :delete, class: 'btn btn-danger'

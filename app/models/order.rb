@@ -7,11 +7,11 @@ class Order < ApplicationRecord
   def add_course(price)
     case price.item.course
     when 'first_course'
-      self.first_course = price
+      self.first_course = toggle_course(self.first_course, price)
     when 'main_course'
-      self.main_course = price
+      self.main_course = toggle_course(self.main_course, price)
     when 'drink'
-      self.drink = price
+      self.drink = toggle_course(self.drink, price)
     end
   end
 
@@ -30,5 +30,11 @@ class Order < ApplicationRecord
 
   def created_date
     created_at.to_datetime.to_date
+  end
+
+  private
+
+  def toggle_course(course, price)
+    price unless course == price
   end
 end

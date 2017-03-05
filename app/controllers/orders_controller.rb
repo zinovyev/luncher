@@ -35,7 +35,7 @@ class OrdersController < ApplicationController
     Order.where(
       'DATE(created_at) = :date AND user_id = :user_id',
       date: date, user_id: current_user.id
-    ).take || Order.create(user: current_user, created_at: date)
+    ).first || Order.create(user: current_user, created_at: date)
   end
 
   def price_to_order_params
