@@ -3,7 +3,10 @@
 - @items.each do |item|
   %div{class: 'panel panel-default'}
     %div{class: 'panel-heading'}= item.title
-    %div{class: 'panel-body'}= "Course: #{item.course}"
+    %div{class: 'panel-body'}
+      = "Course: #{item.course}"
+      - if item.image?
+        = image_tag(item.image_url)
 
 = link_to 'Create New Item', new_item_path, class: 'btn btn-default btn-lg'
 %br

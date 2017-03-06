@@ -1,5 +1,8 @@
 = simple_form_for @item do |f|
   = f.input :title
-  = f.input :photo
+  - if @item.image?
+    = image_tag(@item.image_url)
+  = f.label :image
+  = f.file_field :image, class: 'btn btn-primary'
   = f.input :course, collection: {first_course: 0, second_course: 1, drink: 2}
   = f.button :submit
