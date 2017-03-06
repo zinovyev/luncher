@@ -13,13 +13,13 @@
 * ~~Lunches admin can add items in menu for today~~
 * ~~Lunches admin can upload photo for each menu item~~
 * ~~Lunches admin can list orders with summary prices~~
-* Secure RRESTful JSON API to provide a list of orders
+* Secure RESTful JSON API to provide a list of orders
 
 ## Infrastructure
 
 * ~~Connect to Travis CI~~
 * ~~Autodeploy to Heroku~~
-* S3 for image uploads on production
+* ~~S3 for image uploads on production~~
 
 ## Additional features
 
