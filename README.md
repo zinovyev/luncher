@@ -7,10 +7,10 @@ An example Rails app for ordering lunches ([Live Demo](https://zluncher.herokuap
 ## About
 The first logged in user becomes a lunches admin and can rule menus and prices.
 
-## TODO
-* ~~User authentication~~
-* ~~Lunches admin panel~~
-* ~~User orders menu~~
-* Images upload
+## Instructions
 
+## Features
+
+## TODO
+[TODO list]('/doc/todo.md')
 
