@@ -9,8 +9,8 @@ The first logged in user becomes a lunches admin and can rule menus and prices.
 
 ## TODO
 * ~~User authentication~~
-* Lunches admin panel
-* User orders menu
-[Full TODO list](/doc/todo.md)
+* ~~Lunches admin panel~~
+* ~~User orders menu~~
+* Images upload
 
 
