@@ -19,6 +19,7 @@
 
 * ~~Connect to Travis CI~~
 * ~~Autodeploy to Heroku~~
+* S3 for image uploads on production
 
 ## Additional features
 
@@ -26,3 +27,9 @@
 * Google Apps registration
 * Auto suggest for menu items
 * Weekly menus
+
+## Refactoring
+
+* Refactoring
+* Refactoring
+* Refactoring
