@@ -1,3 +1,5 @@
+require 'carrierwave/orm/activerecord'
+
 class Item < ApplicationRecord
   FIRST_COURSE = 0
   MAIN_COURSE = 1
@@ -7,6 +9,11 @@ class Item < ApplicationRecord
   enum course: [:first_course, :main_course, :drink]
   validates :title, presence: true
   validates :course, presence: true
+  mount_uploader :image, ItemImageUploader
+
+  def image_url
+    super || '/images/default_item.jpg'
+  end
 
   def self.course_name(name)
     {

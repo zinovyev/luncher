@@ -5,6 +5,7 @@
     %table{class: 'table'}
       %thead
         %tr
+          %td Image
           %td Title
           %td Course
           %td Price
@@ -13,6 +14,7 @@
       %tbody
         - prices.each do |price|
           %tr{class: "price-row #{'info' if order && order.contains_course(price)}"}
+            %td= image_tag price.image_url, size: '150'
             %td= price.item.title
             %td= price.item.course
             %td= price.value
