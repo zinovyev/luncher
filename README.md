@@ -12,5 +12,5 @@ The first logged in user becomes a lunches admin and can rule menus and prices.
 ## Features
 
 ## TODO
-[TODO list]('/doc/todo.md')
+[TODO list](/doc/todo.md)
 
