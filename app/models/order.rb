@@ -39,7 +39,7 @@ class Order < ApplicationRecord
   def empty?
     !(first_course && main_course && drink)
   end
-  
+
   def sum
     format('%.2f', (
       first_course&.value.to_f +
