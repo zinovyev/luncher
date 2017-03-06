@@ -15,6 +15,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'devise', '~> 4.2'
 gem 'simple_form', '~> 3.4'
 gem 'carrierwave', '~> 1.0'
+gem 'fog-aws', '~> 1.2', '>= 1.2.1'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets

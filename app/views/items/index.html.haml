@@ -1,12 +1,17 @@
 %h1 Items
 
-- @items.each do |item|
-  %div{class: 'panel panel-default'}
-    %div{class: 'panel-heading'}= item.title
-    %div{class: 'panel-body'}
-      = "Course: #{item.course}"
-      - if item.image?
-        = image_tag(item.image_url)
-
+.panel.panel-default
+  .panel-heading Items
+  .panel-body.row
+    - @items.each do |item|
+      .col-sm-6.col-md-4.text-center
+        .thumbnail
+          = image_tag item.image_url, size: '150'
+          .caption
+            %b= item.title
+            %p= "Course: #{item.course}"
+            %p
+              = link_to 'Delete', items_path, class: 'btn btn-danger'
+              = link_to 'Update', items_path, class: 'btn btn-primary'
 = link_to 'Create New Item', new_item_path, class: 'btn btn-default btn-lg'
 %br

@@ -11,6 +11,10 @@ class Item < ApplicationRecord
   validates :course, presence: true
   mount_uploader :image, ItemImageUploader
 
+  def image_url
+    super || '/images/default_item.jpg'
+  end
+
   def self.course_name(name)
     {
       first_course: 'First Course',
