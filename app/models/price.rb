@@ -1,6 +1,7 @@
 class Price < ApplicationRecord
   belongs_to :item
   has_many :orders
+  delegate :title, to: :item
 
   # TODO: add to migration
   before_save :update_date

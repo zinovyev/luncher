@@ -4,6 +4,10 @@ class Order < ApplicationRecord
   belongs_to :main_course, class_name: 'Price', optional: true
   belongs_to :drink, class_name: 'Price', optional: true
 
+  def to_s
+    "#{first_course&.title}, #{main_course&.title}, #{drink&.title}"
+  end
+
   def add_course(price)
     case price.item.course
     when 'first_course'
@@ -32,12 +36,20 @@ class Order < ApplicationRecord
     created_at.to_datetime.to_date
   end
 
-  def summary
+  def empty?
+    !(first_course && main_course && drink)
+  end
+
+  def sum
     format('%.2f', (
       first_course&.value.to_f +
       main_course&.value.to_f +
       drink&.value.to_f
     ).to_s)
+  end
+
+  def summary
+    sum
   end
 
   private
