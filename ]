@@ -73,10 +73,8 @@ class Order < ApplicationRecord
 
   class << self 
     def list(page = 0)
-      page = page.to_i
-      page = page > 1 ? page : 1
       limit = 10
-      offset = limit * (page.to_i - 1)
+      offset = limit * page.to_i
       orders = Order
         .eager_load(
           first_course: [{ item: :first_course }],
