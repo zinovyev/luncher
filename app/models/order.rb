@@ -58,17 +58,16 @@ class Order < ApplicationRecord
     price unless course == price
   end
 
-  class << self 
+  class << self
     def list(page = 0)
       page = page.to_i
       page = page > 1 ? page : 1
       limit = 10
       offset = limit * (page.to_i - 1)
-      orders = Order
-        .eager_load(
+      Order.eager_load(
           first_course: [{ item: :first_course }],
           main_course: [{ item: :first_course }],
-          drink: [{ item: :first_course }],
+          drink: [{ item: :first_course }]
         )
         .order(:created_at)
         .offset(offset)
