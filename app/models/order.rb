@@ -70,6 +70,7 @@ class Order < ApplicationRecord
           main_course: [{ item: :first_course }],
           drink: [{ item: :first_course }],
         )
+        .order(:created_at)
         .offset(offset)
         .limit(limit)
     end
