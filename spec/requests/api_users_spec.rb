@@ -19,7 +19,7 @@ RSpec.describe 'Api users controller', type: :request do
 
   it 'shows the first page of the orders list' do
     get api_v1_orders_path, params: {},
-      headers: {'Authorization' => "Token token=#{api_key.access_token}"}
+      headers: { 'Authorization' => "Token token=#{api_key.access_token}" }
     expect(response).to have_http_status(200)
 
     data = JSON.parse(response.body)
@@ -36,10 +36,24 @@ RSpec.describe 'Api users controller', type: :request do
   end
 
   it 'shows the second page of the orders list' do
+    get api_v1_orders_path, params: { page: 2 },
+      headers: { 'Authorization' => "Token token=#{api_key.access_token}" }
+    expect(response).to have_http_status(200)
 
+    data = JSON.parse(response.body)
+    expect(data.count).to eq 5
   end
 
   it 'shows a detailed information about a user' do
+    user = users.first
+    get api_v1_user_path(user), params: { },
+      headers: { 'Authorization' => "Token token=#{api_key.access_token}" }
+    expect(response).to have_http_status(200)
 
+    user_data = JSON.parse(response.body)
+    expect(user_data['id']).to eq user.id
+    expect(user_data['name']).to eq user.name
+    expect(user_data['email']).to eq user.email
+    expect(user_data['lunches_admin']).to eq user.lunches_admin
   end
 end
