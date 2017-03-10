@@ -65,13 +65,13 @@ class Order < ApplicationRecord
       limit = 10
       offset = limit * (page.to_i - 1)
       Order.eager_load(
-          first_course: [{ item: :first_course }],
-          main_course: [{ item: :first_course }],
-          drink: [{ item: :first_course }]
-        )
-        .order(:created_at)
-        .offset(offset)
-        .limit(limit)
+        first_course: [{ item: :first_course }],
+        main_course: [{ item: :first_course }],
+        drink: [{ item: :first_course }]
+      )
+           .order(:created_at)
+           .offset(offset)
+           .limit(limit)
     end
   end
 end

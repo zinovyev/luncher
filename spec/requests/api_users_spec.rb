@@ -18,8 +18,8 @@ RSpec.describe 'Api users controller', type: :request do
 
   it 'shows the first page of the orders list' do
     get api_v1_orders_path,
-      params: {},
-      headers: { 'Authorization' => "Token token=#{api_key.access_token}" }
+        params: {},
+        headers: { 'Authorization' => "Token token=#{api_key.access_token}" }
 
     expect(response).to have_http_status(200)
 
@@ -38,8 +38,8 @@ RSpec.describe 'Api users controller', type: :request do
 
   it 'shows the second page of the orders list' do
     get api_v1_orders_path,
-      params: { page: 2 },
-      headers: { 'Authorization' => "Token token=#{api_key.access_token}" }
+        params: { page: 2 },
+        headers: { 'Authorization' => "Token token=#{api_key.access_token}" }
 
     expect(response).to have_http_status(200)
 
@@ -50,8 +50,8 @@ RSpec.describe 'Api users controller', type: :request do
   it 'shows a detailed information about a user' do
     user = users.first
     get api_v1_user_path(user),
-      params: {},
-      headers: { 'Authorization' => "Token token=#{api_key.access_token}" }
+        params: {},
+        headers: { 'Authorization' => "Token token=#{api_key.access_token}" }
 
     expect(response).to have_http_status(200)
 
