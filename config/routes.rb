@@ -16,10 +16,10 @@ Rails.application.routes.draw do
   resources :items
   resources :prices
 
-  namespace :api do
+  namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :orders, only: [:index]
-      resources :users, lnly: [:index, :show]
+      resources :users, lnly: [:show]
     end
   end
 end

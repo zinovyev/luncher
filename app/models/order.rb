@@ -1,21 +1,8 @@
 class Order < ApplicationRecord
-  include ActiveModel::Serializers::JSON
-
   belongs_to :user
   belongs_to :first_course, class_name: 'Price', optional: true
   belongs_to :main_course, class_name: 'Price', optional: true
   belongs_to :drink, class_name: 'Price', optional: true
-
-  def attributes
-    {
-      id: id,
-      user_id: user_id,
-      first_course: first_course,
-      main_course: main_course,
-      drink: drink,
-      created_at: created_at
-    }
-  end
 
   def to_s
     "#{first_course&.title}, #{main_course&.title}, #{drink&.title}"

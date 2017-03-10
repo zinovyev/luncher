@@ -1,19 +1,11 @@
 class Price < ApplicationRecord
-  include ActiveModel::Serializers::JSON
-
   belongs_to :item, inverse_of: :prices
   has_many :orders
   delegate :title, :image_url, to: :item
   # TODO: add to migration
   before_save :update_date
-
-  def attributes
-    {
-      value: value,
-      title: title,
-      image_url: image_url 
-    }
-  end
+  alias_attribute :price, :value
+  alias_attribute :image, :image_url
 
   private
 

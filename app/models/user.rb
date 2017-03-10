@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-  include ActiveModel::Serializers::JSON
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -8,14 +7,6 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :username, presence: true
   before_validation :become_admin
-
-  def attributes
-    {
-      name: name,
-      email: email,
-      lunches_admin: lunches_admin, 
-    }
-  end
 
   private
 
