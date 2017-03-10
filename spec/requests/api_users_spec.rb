@@ -23,9 +23,8 @@ RSpec.describe 'Api users controller', type: :request do
     expect(response).to have_http_status(200)
 
     data = JSON.parse(response.body)
-    orders.each { |o| puts o['created_at'] }
-    order = orders.sort {|o| o['created_at']}.first
     first_order_data = data.first
+    order = Order.find(first_order_data['id'])
 
     expect(data.count).to eq 10
     expect(first_order_data['id']).to eq order.id
