@@ -4,6 +4,10 @@ class OrderSerializer < ActiveModel::Serializer
   has_one :main_course
   has_one :drink
 
+  def created_at
+    object.created_at.to_date
+  end
+
   class PriceSerializer < ActiveModel::Serializer
     attributes :price, :title, :image
   end

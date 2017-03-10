@@ -29,8 +29,8 @@ RSpec.describe 'Api users controller', type: :request do
     expect(data.count).to eq 10
     expect(first_order_data['id']).to eq order.id
     expect(first_order_data['user_id']).to eq order.user_id
-    expect(first_order_data['created_at']).to eq order.created_at
-    expect(first_order_data['first_course']['price']).to eq order.first_course.price
+    expect(first_order_data['created_at']).to eq order.created_at.strftime('%Y-%m-%d')
+    expect(first_order_data['first_course']['price']).to eq order.first_course.price.to_s
     expect(first_order_data['main_course']['title']).to eq order.main_course.title
     expect(first_order_data['drink']['image']).to eq order.drink.image_url
   end
