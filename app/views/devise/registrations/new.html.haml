@@ -10,6 +10,13 @@
     %br/
     = f.text_field :username
   .field
+    = f.label :organization
+    %br/
+    = f.collection_select(:organization_id,
+                          Organization.list_public,
+                          :id,
+                          :title)
+  .field
     = f.label :email
     %br/
     = f.email_field :email
