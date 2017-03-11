@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :orders
+  belongs_to :organization, inverse_of: :users
+
+  validates :organization, presence: true
   validates :name, presence: true
   validates :username, presence: true
   before_validation :become_admin
