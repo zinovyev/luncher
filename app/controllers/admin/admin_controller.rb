@@ -1,8 +1,6 @@
 module Admin
   class AdminController < ApplicationController
-    included do
-      before_action :require_admin
-    end
+    before_action :require_admin
 
     private
 
