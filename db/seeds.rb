@@ -9,7 +9,7 @@
 default = Organization.create(id: 1, title: 'Default', public: false)
 google = Organization.create(id: 2, title: 'Google')
 yandex = Organization.create(id: 3, title: 'Yandex')
-meduza = Organization.create(id: 4, title: 'Meduze')
+meduza = Organization.create(id: 4, title: 'Meduza')
 
 admin = User.create(
   name: 'admin',

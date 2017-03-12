@@ -15,7 +15,7 @@ class User < ApplicationRecord
   def active_for_authentication?
     super && (self.approved? || self.lunches_admin?)
   end
-  
+
   private
 
   def become_admin
@@ -28,5 +28,17 @@ class User < ApplicationRecord
 
   def admin_exists?
     User.where(lunches_admin: true).count.positive?
+  end
+
+  class << self
+    def list_public(organization_id, &block)
+      list = where(lunches_admin: false, organization_id: organization_id)
+      if block_given?
+        list.each do |user|
+          block.call user
+        end
+      end
+      list
+    end
   end
 end
