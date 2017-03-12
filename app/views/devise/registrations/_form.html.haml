@@ -21,6 +21,12 @@
                           :id,
                           :title)
 
+- if local_assigns[:select_approved]
+  .field
+    = f.label :approved
+    %br/
+    = f.check_box :approved
+
 - if current_page?(new_user_registration_path)
   .field
     = f.label :password

@@ -4,11 +4,11 @@
 
 * ~~User sign up and sign in~~
 * ~~First user becomes a lunches admin~~
-* User can edit profile
+* ~~User can edit profile~~
 * ~~Weekdays calendar on a user dashboard~~
 * ~~User can select items from menu (first course, main course and a drink)~~
 * ~~Submit button to process an order~~
-* Lunches admin can browse registered users
+* ~~Lunches admin can browse registered users~~
 * Lunches admin can browe days and see orders there
 * ~~Lunches admin can add items in menu for today~~
 * ~~Lunches admin can upload photo for each menu item~~
