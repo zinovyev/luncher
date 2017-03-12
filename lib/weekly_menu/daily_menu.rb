@@ -1,15 +1,11 @@
 module WeeklyMenu
   class DailyMenu 
-    attr_accessor :date, :items
+    attr_accessor :date, :prices
     attr_reader :first_courses, :main_courses, :drinks
 
-    def initialize(date, items = [])
+    def initialize(date, prices = [])
       @date = date
-      self.items = items
-    end
-
-    def items=(items)
-      @items = items
+      self.prices = prices
     end
 
     def first_courses
@@ -30,13 +26,13 @@ module WeeklyMenu
     private
 
     def sort_courses
-      if @last_items_count != @items.count
+      if @last_prices_count != @prices.count
         courses = [[], [], []]
-        @items.each do |item|
-          courses[item.course] << item
+        @prices.each do |price|
+          courses[price.item.course] << price 
         end
         @first_courses, @main_courses, @drinks = *courses
-        @last_items_count = @items.count
+        @last_prices_count = @prices.count
       end
     end
   end

@@ -2,10 +2,18 @@ require 'date'
 
 module WeeklyMenu
   class WeeklyMenu
+    attr_accessor :prices
     attr_reader :days
 
     def initialize
       @days = initialize_week_days
+    end
+
+    def prices=(prices)
+      @prices = prices
+      prices.each do |price|
+      
+      end
     end
 
     def [](name)
@@ -38,6 +46,10 @@ module WeeklyMenu
 
     def normalize_day_name(name)
       name.to_s.gsub(/(\w+)=/, '\1').downcase.to_sym
+    end
+
+    def normalize_date_format(date)
+      date.strftime('%Y-%m-%d')
     end
 
     def first_week_day
