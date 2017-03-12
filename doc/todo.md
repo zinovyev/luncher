@@ -13,7 +13,7 @@
 * ~~Lunches admin can add items in menu for today~~
 * ~~Lunches admin can upload photo for each menu item~~
 * ~~Lunches admin can list orders with summary prices~~
-* Secure RESTful JSON API to provide a list of orders
+* ~~Secure RESTful JSON API to provide a list of orders~~
 
 ## Infrastructure
 

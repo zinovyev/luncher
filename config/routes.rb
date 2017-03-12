@@ -15,4 +15,11 @@ Rails.application.routes.draw do
   resources :orders, except: [:new]
   resources :items
   resources :prices
+
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :orders, only: [:index]
+      resources :users, only: [:show]
+    end
+  end
 end
