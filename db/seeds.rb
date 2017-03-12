@@ -31,3 +31,11 @@ admin = User.create(
     )
   end
 end
+
+50.times do |i|
+  item = Item.create(
+    title: Faker::Food.ingredient,
+    course: rand(3).ceil,
+    image: Faker::LoremPixel.image("150x150", false, 'food', (rand(10) + 1)),
+  )
+end

@@ -1,0 +1,22 @@
+%p#notice= notice
+%h1 Admin Items
+%table{class: 'table'}
+  %thead
+    %tr
+      %th Image
+      %th Title 
+      %th Course
+      %th{:colspan => "3"}
+  %tbody
+    - @items.each do |item|
+      %tr
+        %td= image_tag(item.image_url, height: 150)
+        %td= item.title
+        %td= item.course
+        %td= link_to 'Show', item
+        %td= link_to 'Edit', edit_admin_item_path(item)
+        %td= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= will_paginate @items
+%br/
+= link_to 'New Admin Item', new_admin_item_path

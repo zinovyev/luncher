@@ -2,7 +2,7 @@ class Admin::ItemsController < ApplicationController
   before_action :set_admin_item, only: [:show, :edit, :update, :destroy]
 
   def index
-    @items = Item.all
+    @items = Item.paginate(page: params[:page], per_page: 10)
   end
 
   def show

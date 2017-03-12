@@ -14,6 +14,12 @@ class Price < ApplicationRecord
   end
 
   class << self
+    def weekly_menus(organization)
+      weekly_menu = WeeklyMenu::WeeklyMenu.new
+      prices = where(organization: organization, actual_at: weekly_menu.monday.date..weekly_menu.sunday.date)
+      weekly_menu.prices = prices
+    end
+
     def for_today(date = nil)
       date ||= today
       where('date = :today', today: date)

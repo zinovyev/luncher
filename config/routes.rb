@@ -24,6 +24,9 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :users
+    resources :users, except: [:new, :show]
+    resources :orders
+    resources :menus
+    resources :items
   end
 end
