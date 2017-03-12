@@ -12,7 +12,9 @@ module WeeklyMenu
     def prices=(prices)
       @prices = prices
       prices.each do |price|
-      
+        if day = find_day_by_date(price.date)
+          day.prices << price
+        end
       end
     end
 
@@ -33,13 +35,26 @@ module WeeklyMenu
       self[name]
     end
 
+    def find_day_by_date(date)
+      date = normalize_date_format(date.to_date)
+      @days.each do |name, day|
+        if date == normalize_date_format(day.date)
+          return day
+        end
+      end
+      nil
+    end
+
     private
 
     def initialize_week_days
       weekly_menu = {}
-      Date::DAYNAMES.each_with_index do |name, i|
+      daynames = Date::DAYNAMES.dup
+      daynames.push daynames.shift
+      daynames.each_with_index do |name, i|
         date = first_week_day + i
-        weekly_menu[normalize_day_name(name)] = DailyMenu.new date
+        normalized_name = normalize_day_name(name)
+        weekly_menu[normalized_name] = DailyMenu.new normalized_name, date
       end
       weekly_menu
     end

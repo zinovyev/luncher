@@ -1,9 +1,10 @@
 module WeeklyMenu
   class DailyMenu 
-    attr_accessor :date, :prices
+    attr_accessor :name, :date, :prices
     attr_reader :first_courses, :main_courses, :drinks
 
-    def initialize(date, prices = [])
+    def initialize(name, date, prices = [])
+      @name = name
       @date = date
       self.prices = prices
     end
