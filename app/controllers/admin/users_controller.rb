@@ -19,11 +19,8 @@ module Admin
     end
 
     def destroy
-      @admin_user.destroy
-      respond_to do |format|
-        format.html { redirect_to admin_users_path, notice: 'User was successfully destroyed.' }
-        format.json { head :no_content }
-      end
+      @user.destroy
+      redirect_to admin_users_path, notice: 'User was successfully destroyed.'
     end
 
     private
