@@ -12,12 +12,17 @@ class User < ApplicationRecord
   validates_with PublicOrganizationValidator
   before_validation :become_admin
 
+  def active_for_authentication?
+    super && (self.approved? || self.lunches_admin?)
+  end
+  
   private
 
   def become_admin
     unless admin_exists?
       self.organization = Organization.find(1)
       self.lunches_admin = true
+      self.approved = true
     end
   end
 
