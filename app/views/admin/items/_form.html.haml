@@ -1,5 +1,11 @@
-= simple_form_for(@admin_item) do |f|
-  = f.error_notification
-  .form-inputs
-  .form-actions
-    = f.button :submit
+= f.error_notification
+.form-inputs
+  = f.input :title
+  - if @item.image?
+    = image_tag @item.image_url
+  = f.label :image
+  = f.file_field :image, class: 'btn btn-primary'
+  = f.input :course, collection: {first_course: 0, second_course: 1, drink: 2}
+
+.form-actions
+  = f.button :submit

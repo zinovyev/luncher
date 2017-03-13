@@ -1,7 +1,9 @@
 %h1 Editing Admin Organization
+
 = simple_form_for @organization,
-  url: admin_organizations_path,
-  method: :put do |f|
+    url: admin_organizations_path,
+    method: :put do |f|
+
   = render 'form', f: f
 
 = render 'shared/back_button', url: admin_organizations_path

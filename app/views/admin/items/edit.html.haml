@@ -1,5 +1,9 @@
-%h1 Editing Admin Item
-= render 'form', admin_item: @admin_item
-= link_to 'Show', @admin_item
-|
-= link_to 'Back', admin_items_path
+%h1 Editing Item
+
+= simple_form_for @item,
+    url: admin_items_path,
+    method: :put do |f|
+
+  = render 'form', f: f
+
+= render 'shared/back_button', url: admin_items_path
