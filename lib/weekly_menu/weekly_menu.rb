@@ -9,15 +9,6 @@ module WeeklyMenu
       @days = initialize_week_days
     end
 
-    def prices=(prices)
-      @prices = prices
-      prices.each do |price|
-        if day = find_day_by_date(price.date)
-          day.prices << price
-        end
-      end
-    end
-
     def [](name)
       @days[normalize_day_name(name)] 
     end
@@ -25,6 +16,31 @@ module WeeklyMenu
     def []=(name, menu)
       name = normalize_day_name(name)
       @days[name] = menu if @days.has_key? name
+    end
+
+    def prices=(prices)
+      @prices = prices
+      sort_prices
+    end
+
+    def longest_price_stack
+      @days.values.reduce(0) do |acc, day|
+        acc = day.prices.count if acc < day.prices.count
+        acc
+      end
+    end
+
+    def price_rows
+      rows = []
+      (0..longest_price_stack).each do |i|
+        row = []
+        days.each do |_name, day|
+          row << day.prices[i] 
+        end
+        yield row if block_given?
+        rows << row
+      end
+      rows
     end
 
     def method_missing(name, *args)
@@ -46,6 +62,14 @@ module WeeklyMenu
     end
 
     private
+
+    def sort_prices
+      @prices.each do |price|
+        if day = find_day_by_date(price.date)
+          day.prices << price
+        end
+      end
+    end
 
     def initialize_week_days
       weekly_menu = {}

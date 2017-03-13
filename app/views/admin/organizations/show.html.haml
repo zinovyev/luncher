@@ -1,4 +1,30 @@
-%p#notice= notice
-= link_to 'Edit', edit_admin_organization_path(@admin_organization)
+%h1= @organization.title
+
+%table{class: 'table table-striped'}
+  %thead
+    %tr
+      - @weekly_menu.days.each do |name, day|
+        %th
+          #{name.upcase}
+          %br/
+          #{(day.date.strftime('%Y-%d-%m'))}
+          %br/
+          = link_to 'New Price', nil, class: 'btn btn-default btn-sm'
+  %tbody
+    - @weekly_menu.price_rows do |row|
+      %tr
+        - row.each do |price|
+          %td
+            - if price
+              %b= price.title
+              \:
+              = price.value
+              %br/
+              (#{price.course})
+              %br/
+              = link_to 'Edit', nil, class: 'btn btn-primary btn-xs'
+              = link_to 'Delete', nil, class: 'btn btn-danger btn-xs'
+
+= link_to 'Edit', edit_admin_organization_path(@organization)
 |
 = link_to 'Back', admin_organizations_path

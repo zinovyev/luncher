@@ -32,10 +32,22 @@ admin = User.create(
   end
 end
 
+items = []
 50.times do |i|
-  item = Item.create(
+  items << Item.create(
     title: Faker::Food.ingredient,
     course: rand(3).ceil,
     image: Faker::LoremPixel.image("150x150", false, 'food', (rand(10) + 1)),
+  )
+end
+
+weekly_menu = WeeklyMenu::WeeklyMenu.new
+prices = []
+1000.times do |i|
+  prices << Price.create(
+    item: items.sample,
+    organization: Organization.list_public.sample,
+    value: Faker::Number.decimal(5, 2),
+    date: weekly_menu.days.values.map(&:date).sample
   )
 end

@@ -1,0 +1,6 @@
+%br/
+- text = 'Back' if local_assigns[:text].nil?
+- url = nil if local_assigns[:url].nil?
+= link_to raw("<span class=\"glyphicon glyphicon-chevron-left\" aria-hidden=\"true\"></span> #{text}"),
+  url,
+  class: 'btn btn-default'

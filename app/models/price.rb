@@ -1,11 +1,11 @@
 class Price < ApplicationRecord
   belongs_to :item, inverse_of: :prices
+  belongs_to :organization, inverse_of: :prices
   has_many :orders
-  delegate :title, :image_url, to: :item
-  # TODO: add to migration
-  before_save :update_date
+  delegate :title, :image_url, :course, to: :item
   alias_attribute :price, :value
   alias_attribute :image, :image_url
+  before_save :update_date
 
   private
 
@@ -14,10 +14,23 @@ class Price < ApplicationRecord
   end
 
   class << self
-    def weekly_menus(organization)
+    def prices_for_organization(organization, date_from, date_to)
+      Price
+        .where(
+          organization: organization,
+          date: date_from..date_to)
+        .eager_load(:item)
+        .order('items.course')
+    end
+
+    def weekly_menu(organization)
       weekly_menu = WeeklyMenu::WeeklyMenu.new
-      prices = where(organization: organization, actual_at: weekly_menu.monday.date..weekly_menu.sunday.date)
-      weekly_menu.prices = prices
+      weekly_menu.prices = prices_for_organization(
+        organization,
+        weekly_menu.monday.date,
+        weekly_menu.sunday.date
+      )
+      weekly_menu
     end
 
     def for_today(date = nil)

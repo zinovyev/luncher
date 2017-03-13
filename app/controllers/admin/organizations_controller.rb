@@ -1,74 +1,52 @@
-class Admin::OrganizationsController < ApplicationController
-  before_action :set_admin_organization, only: [:show, :edit, :update, :destroy]
+module Admin
+  class OrganizationsController < ApplicationController
+    before_action :set_organization, only: [:show, :edit, :update, :destroy]
 
-  # GET /admin/organizations
-  # GET /admin/organizations.json
-  def index
-    @admin_organizations = Admin::Organization.all
-  end
+    def index
+      @organizations = Organization.list_public.paginate(page: params[:page], per_page: 10)
+    end
 
-  # GET /admin/organizations/1
-  # GET /admin/organizations/1.json
-  def show
-  end
+    def show
+      @weekly_menu = Price.weekly_menu(@organization)
+    end
 
-  # GET /admin/organizations/new
-  def new
-    @admin_organization = Admin::Organization.new
-  end
+    def new
+      @organization = Organization.new(public: true)
+    end
 
-  # GET /admin/organizations/1/edit
-  def edit
-  end
+    def edit
+    end
 
-  # POST /admin/organizations
-  # POST /admin/organizations.json
-  def create
-    @admin_organization = Admin::Organization.new(admin_organization_params)
-
-    respond_to do |format|
-      if @admin_organization.save
-        format.html { redirect_to @admin_organization, notice: 'Organization was successfully created.' }
-        format.json { render :show, status: :created, location: @admin_organization }
+    def create
+      @organization = Organization.new(organization_params)
+      if @organization.save
+        redirect_to admin_organizations_path, notice: 'Organization was successfully created.'
       else
-        format.html { render :new }
-        format.json { render json: @admin_organization.errors, status: :unprocessable_entity }
+        render :new
       end
     end
-  end
 
-  # PATCH/PUT /admin/organizations/1
-  # PATCH/PUT /admin/organizations/1.json
-  def update
-    respond_to do |format|
-      if @admin_organization.update(admin_organization_params)
-        format.html { redirect_to @admin_organization, notice: 'Organization was successfully updated.' }
-        format.json { render :show, status: :ok, location: @admin_organization }
+    def update
+      if @organization.update(organization_params)
+        redirect_to admin_organizations_path, notice: 'Organization was successfully updated.'
       else
-        format.html { render :edit }
-        format.json { render json: @admin_organization.errors, status: :unprocessable_entity }
+        render :edit
       end
     end
-  end
 
-  # DELETE /admin/organizations/1
-  # DELETE /admin/organizations/1.json
-  def destroy
-    @admin_organization.destroy
-    respond_to do |format|
-      format.html { redirect_to admin_organizations_url, notice: 'Organization was successfully destroyed.' }
-      format.json { head :no_content }
+    def destroy
+      @organization.destroy
+      redirect_to admin_organizations_path, notice: 'Organization was successfully destroyed.'
+    end
+
+    private
+
+    def set_organization
+      @organization = Organization.where(id: params[:id], public: true).take
+    end
+
+    def organization_params
+      params.require(:organization).permit(:title)
     end
   end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_admin_organization
-      @admin_organization = Admin::Organization.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def admin_organization_params
-      params.fetch(:admin_organization, {})
-    end
 end

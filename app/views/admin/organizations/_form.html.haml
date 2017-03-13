@@ -1,5 +1,5 @@
-= simple_form_for(@admin_organization) do |f|
-  = f.error_notification
-  .form-inputs
-  .form-actions
-    = f.button :submit
+= f.error_notification
+.form-inputs
+  = f.input :title
+.form-actions
+  = f.button :submit
