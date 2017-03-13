@@ -25,7 +25,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users, except: [:new, :show]
-    resources :items
+    resources :items do
+      get :autocomplete_item_title, :on => :collection
+    end
     resources :orders
     resources :organizations do
       resources :prices

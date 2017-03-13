@@ -6,6 +6,7 @@ class Price < ApplicationRecord
   alias_attribute :price, :value
   alias_attribute :image, :image_url
   before_save :update_date
+  validates :value, presence: true
 
   private
 

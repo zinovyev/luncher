@@ -1,0 +1,14 @@
+%p#notice= notice
+%h1 Admin Organizations Prices
+%table
+  %thead
+    %tr
+      %th{:colspan => "3"}
+  %tbody
+    - @admin_organizations_prices.each do |admin_organizations_price|
+      %tr
+        %td= link_to 'Show', admin_organizations_price
+        %td= link_to 'Edit', edit_admin_organizations_price_path(admin_organizations_price)
+        %td= link_to 'Destroy', admin_organizations_price, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Admin Organizations Price', new_admin_organizations_price_path

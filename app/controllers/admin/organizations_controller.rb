@@ -1,5 +1,5 @@
 module Admin
-  class OrganizationsController < ApplicationController
+  class OrganizationsController < AdminController 
     before_action :set_organization, only: [:show, :edit, :update, :destroy]
 
     def index

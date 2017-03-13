@@ -9,7 +9,9 @@
           %br/
           #{(day.date.strftime('%Y-%d-%m'))}
           %br/
-          = link_to 'New Price', nil, class: 'btn btn-default btn-sm'
+          = link_to 'New Price',
+            new_admin_organization_price_path(organization_id: @organization),
+            class: 'btn btn-default btn-sm'
   %tbody
     - @weekly_menu.price_rows do |row|
       %tr
@@ -25,6 +27,4 @@
               = link_to 'Edit', nil, class: 'btn btn-primary btn-xs'
               = link_to 'Delete', nil, class: 'btn btn-danger btn-xs'
 
-= link_to 'Edit', edit_admin_organization_path(@organization)
-|
-= link_to 'Back', admin_organizations_path
+= render 'shared/back_button', url: admin_organizations_path

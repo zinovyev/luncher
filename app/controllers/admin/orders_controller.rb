@@ -1,4 +1,4 @@
-class Admin::OrdersController < ApplicationController
+class Admin::OrdersController < AdminController
   before_action :set_admin_order, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/orders
