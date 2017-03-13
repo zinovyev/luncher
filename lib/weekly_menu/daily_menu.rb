@@ -9,6 +9,10 @@ module WeeklyMenu
       self.prices = prices
     end
 
+    def sql_date
+      date.strftime('%Y-%m-%d')
+    end
+    
     def first_courses
       sort_courses
       @first_courses

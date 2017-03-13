@@ -30,7 +30,13 @@ Rails.application.routes.draw do
     end
     resources :orders
     resources :organizations do
-      resources :prices
+      resources :prices, except: [:index, :show, :new, :create, :edit]
     end
   end
+  post '/admin/organizations/:organization_id/prices/:date',
+    to: 'admin/prices#create',
+    as: :admin_organization_prices
+  get '/admin/organizations/:organization_id/prices/:date/new',
+    to: 'admin/prices#new',
+    as: :new_admin_organization_price
 end

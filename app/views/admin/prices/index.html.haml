@@ -5,7 +5,7 @@
     %tr
       %th{:colspan => "3"}
   %tbody
-    - @admin_organizations_prices.each do |admin_organizations_price|
+    - @prices.each do |price|
       %tr
         %td= link_to 'Show', admin_organizations_price
         %td= link_to 'Edit', edit_admin_organizations_price_path(admin_organizations_price)

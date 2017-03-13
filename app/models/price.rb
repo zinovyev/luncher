@@ -1,18 +1,19 @@
 class Price < ApplicationRecord
+  attr_accessor :item_name
   belongs_to :item, inverse_of: :prices
   belongs_to :organization, inverse_of: :prices
   has_many :orders
   delegate :title, :image_url, :course, to: :item
   alias_attribute :price, :value
   alias_attribute :image, :image_url
-  before_save :update_date
+  # before_save :update_date
   validates :value, presence: true
 
   private
 
-  def update_date
-    self.date ||= Time.zone.today
-  end
+  # def update_date
+    # self.date ||= Time.zone.today
+  # end
 
   class << self
     def prices_for_organization(organization, date_from, date_to)
