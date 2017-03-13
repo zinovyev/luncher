@@ -25,8 +25,8 @@
 
 * Add organizations
 * Google Apps registration
-* Auto suggest for menu items
-* Weekly menus
+* ~~Auto suggest for menu itemsi~~
+* ~~Weekly menus~~
 
 ## Refactoring
 
