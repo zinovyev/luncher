@@ -1,0 +1,34 @@
+%h1= @organization.title
+
+%table{class: 'table table-striped'}
+  %thead
+    %tr
+      - @weekly_menu.days.each do |name, day|
+        %th
+          #{name.upcase}
+          %br/
+          #{(day.sql_date)}
+          %br/
+          = link_to 'New Price',
+            new_admin_organization_price_path(organization_id: @organization,
+              date: day.sql_date),
+            class: 'btn btn-default btn-sm'
+  %tbody
+    - @weekly_menu.price_rows do |row|
+      %tr
+        - row.each do |price|
+          %td
+            - if price
+              %b= price.title
+              \:
+              = price.value
+              %br/
+              (#{price.course})
+              %br/
+              = link_to 'Delete',
+                admin_organization_price_path(organization_id: @organization,
+                  id: price),
+                method: :delete,
+                class: 'btn btn-danger btn-xs'
+
+= render 'shared/back_button', url: admin_organizations_path

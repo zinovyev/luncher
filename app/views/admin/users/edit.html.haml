@@ -1,0 +1,14 @@
+%h2 Edit #{@user.name.to_s.humanize}
+= form_for(resource,
+  as: resource_name,
+  url: admin_user_path(resource),
+  html: { method: :put }) do |f|
+  = render 'devise/registrations/form',
+      f: f,
+      resource: resource,
+      organization_select: true,
+      change_approved: true,
+      select_approved: true,
+      submit_text: 'Edit'
+
+= render 'shared/back_button', url: admin_users_path

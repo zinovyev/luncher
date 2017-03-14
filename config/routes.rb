@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'pages#index'
 
-  devise_for :user
+  devise_for :user, controllers: { registrations: 'registrations' }
   match 'login', to: 'devise/sessions#new', via: :get
   match 'logout', to: 'devise/sessions#destroy', via: :delete
   match 'sign_up', to: 'devise/registrations#new', via: :get
@@ -22,4 +22,21 @@ Rails.application.routes.draw do
       resources :users, only: [:show]
     end
   end
+
+  namespace :admin do
+    resources :users, except: [:new, :show]
+    resources :items do
+      get :autocomplete_item_title, :on => :collection
+    end
+    resources :orders
+    resources :organizations do
+      resources :prices, except: [:index, :show, :new, :create, :edit]
+    end
+  end
+  post '/admin/organizations/:organization_id/prices/:date',
+    to: 'admin/prices#create',
+    as: :admin_organization_prices
+  get '/admin/organizations/:organization_id/prices/:date/new',
+    to: 'admin/prices#new',
+    as: :new_admin_organization_price
 end

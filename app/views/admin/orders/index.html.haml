@@ -1,0 +1,22 @@
+%h1 Orders list
+
+%div{class: 'panel panel-default'}
+  %div{class: 'panel-heading'}
+    Orders
+  %table{class: 'table'}
+    %thead
+      %tr
+        %td Id
+        %td User
+        %td Items
+        %td Sum
+        %td Date
+    %tbody
+      - @orders.each do |order|
+        - if order.sum.to_i.positive?
+          %tr
+            %td= order.id
+            %td= order.user.name
+            %td= order
+            %td= order.summary
+            %td= order.created_at.to_date

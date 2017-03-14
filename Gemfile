@@ -16,6 +16,9 @@ gem 'devise', '~> 4.2'
 gem 'simple_form', '~> 3.4'
 gem 'carrierwave', '~> 1.0'
 gem 'active_model_serializers', '~> 0.10.0'
+gem 'will_paginate', '~> 3.1.1'
+gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
+gem 'rails-jquery-autocomplete', '~> 1.0', '>= 1.0.2'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets

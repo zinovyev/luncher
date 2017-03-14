@@ -1,0 +1,10 @@
+= f.error_notification
+.form-inputs
+  = f.input :item_name,
+    url: autocomplete_item_title_admin_items_path,
+    :as => :autocomplete,
+    :id_element => '#price_item_id'
+  = f.input :item_id, as: :hidden
+  = f.input :value
+.form-actions
+  = f.button :submit

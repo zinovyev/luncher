@@ -1,0 +1,44 @@
+= devise_error_messages!
+.field
+  = f.label :name
+  %br/
+  = f.text_field :name, autofocus: true
+.field
+  = f.label :username
+  %br/
+  = f.text_field :username
+.field
+  = f.label :email
+  %br/
+  = f.email_field :email
+
+- if local_assigns[:organization_select]
+  .field
+    = f.label :organization
+    %br/
+    = f.collection_select(:organization_id,
+                          Organization.list_public,
+                          :id,
+                          :title)
+
+- if local_assigns[:select_approved]
+  .field
+    = f.label :approved
+    %br/
+    = f.check_box :approved
+
+- if current_page?(new_user_registration_path)
+  .field
+    = f.label :password
+    - if @minimum_password_length
+      %em
+        (#{@minimum_password_length} characters minimum)
+    %br/
+    = f.password_field :password, autocomplete: "off"
+  .field
+    = f.label :password_confirmation
+    %br/
+    = f.password_field :password_confirmation, autocomplete: "off"
+
+.actions
+  = f.submit local_assigns[:submit_text]

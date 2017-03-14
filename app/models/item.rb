@@ -7,7 +7,7 @@ class Item < ApplicationRecord
   has_one :first_course, class_name: 'Price'
   has_one :main_course, class_name: 'Price'
   has_one :drink, class_name: 'Price'
-  has_many :prices, inverse_of: :item
+  has_many :prices, inverse_of: :item, dependent: :delete_all
   enum course: [:first_course, :main_course, :drink]
   validates :title, presence: true
   validates :course, presence: true
