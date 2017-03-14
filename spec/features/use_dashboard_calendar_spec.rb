@@ -5,6 +5,8 @@ describe 'dashboard calendar' do
   let!(:user) do
     create_list(:user, 2)
     user = User.last
+    user.approved = true
+    user.save
     sign_in user
     user
   end
