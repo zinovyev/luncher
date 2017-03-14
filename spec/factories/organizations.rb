@@ -1,6 +1,5 @@
 FactoryGirl.define do
   factory :organization do
-    title "MyString"
-    admin_id 1
+    title Faker::Company.name
   end
 end
