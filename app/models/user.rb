@@ -13,11 +13,12 @@ class User < ApplicationRecord
   before_validation :become_admin
 
   def active_for_authentication?
-    super && (self.approved? || self.lunches_admin?)
+    super && (approved? || lunches_admin?)
   end
 
   private
 
+  # rubocop:disable Style/GuardClause
   def become_admin
     unless admin_exists?
       self.organization = Organization.find(1)
@@ -25,17 +26,18 @@ class User < ApplicationRecord
       self.approved = true
     end
   end
+  # rubocop:enable Style/GuardClause
 
   def admin_exists?
     User.where(lunches_admin: true).count.positive?
   end
 
   class << self
-    def list_public(organization_id, &block)
+    def list_public(organization_id, &_block)
       list = where(lunches_admin: false, organization_id: organization_id)
       if block_given?
         list.each do |user|
-          block.call user
+          yield user
         end
       end
       list

@@ -19,7 +19,6 @@ module Admin
       if @price.save
         redirect_to admin_organization_path(@organization), notice: 'Price was successfully created.'
       else
-        binding.pry
         render :new
       end
     end
@@ -55,7 +54,7 @@ module Admin
       params
         .require(:price)
         .permit(:item_id, :value, :item_name)
-        .reject! {|p| p == 'item_name'}
+        .reject! { |p| p == 'item_name' }
     end
   end
 end

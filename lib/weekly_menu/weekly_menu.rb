@@ -10,12 +10,12 @@ module WeeklyMenu
     end
 
     def [](name)
-      @days[normalize_day_name(name)] 
+      @days[normalize_day_name(name)]
     end
 
     def []=(name, menu)
       name = normalize_day_name(name)
-      @days[name] = menu if @days.has_key? name
+      @days[name] = menu if @days.key? name
     end
 
     def prices=(prices)
@@ -35,7 +35,7 @@ module WeeklyMenu
       (0..longest_price_stack).each do |i|
         row = []
         days.each do |_name, day|
-          row << day.prices[i] 
+          row << day.prices[i]
         end
         yield row if block_given?
         rows << row
@@ -43,20 +43,22 @@ module WeeklyMenu
       rows
     end
 
+    # rubocop:disable Style/MethodMissing
     def method_missing(name, *args)
       name = normalize_day_name(name)
-      unless args.empty?
-        self[name] = args.shift
-      end 
+      args.empty? || self[name] = args.shift
       self[name]
+    end
+    # rubocop:enable Style/MethodMissing
+
+    def respond_to_missing?
+      super
     end
 
     def find_day_by_date(date)
       date = normalize_date_format(date.to_date)
-      @days.each do |name, day|
-        if date == normalize_date_format(day.date)
-          return day
-        end
+      @days.each do |_name, day|
+        return day if date == normalize_date_format(day.date)
       end
       nil
     end
@@ -65,9 +67,8 @@ module WeeklyMenu
 
     def sort_prices
       @prices.each do |price|
-        if day = find_day_by_date(price.date)
-          day.prices << price
-        end
+        day = find_day_by_date(price.date)
+        day.prices << price if day
       end
     end
 
@@ -92,11 +93,11 @@ module WeeklyMenu
     end
 
     def first_week_day
-      @first_week_day ||= (today - ((today.strftime('%u')).to_i - 1))
+      @first_week_day ||= (today - (today.strftime('%u').to_i - 1))
     end
 
     def today
-      @today ||= Date.today
+      @today ||= Time.zone.today
     end
   end
 end

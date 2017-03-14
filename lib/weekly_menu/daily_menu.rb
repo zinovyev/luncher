@@ -1,5 +1,5 @@
 module WeeklyMenu
-  class DailyMenu 
+  class DailyMenu
     attr_accessor :name, :date, :prices
     attr_reader :first_courses, :main_courses, :drinks
 
@@ -12,7 +12,7 @@ module WeeklyMenu
     def sql_date
       date.strftime('%Y-%m-%d')
     end
-    
+
     def first_courses
       sort_courses
       @first_courses
@@ -30,15 +30,17 @@ module WeeklyMenu
 
     private
 
+    # rubocop:disable Style/GuardClause
     def sort_courses
       if @last_prices_count != @prices.count
         courses = [[], [], []]
         @prices.each do |price|
-          courses[price.item.course] << price 
+          courses[price.item.course] << price
         end
         @first_courses, @main_courses, @drinks = *courses
         @last_prices_count = @prices.count
       end
     end
+    # rubocop:enable Style/GuardClause
   end
 end

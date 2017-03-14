@@ -28,7 +28,7 @@ describe 'add today prices process' do
     button_selector = '//a[contains(text(), "Weekly Menu")]'
     expect(page).to have_selector(:xpath, button_selector, count: 3)
     find(:xpath, "(#{button_selector})[1]").click
-    
+
     expect(page).to have_current_path(admin_organization_path(2))
     button_selector = '//a[contains(text(), "New Price")]'
     expect(page).to have_selector(:xpath, button_selector, count: 7)
