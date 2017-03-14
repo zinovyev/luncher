@@ -1,5 +1,5 @@
 class Organization < ApplicationRecord
-  has_many :users, inverse_of: :organization, dependent: :delete_all 
+  has_many :users, inverse_of: :organization, dependent: :delete_all
   has_many :prices, inverse_of: :organization, dependent: :delete_all
   validates :title, presence: true, length: { minimum: 5, maximum: 30 }
 
