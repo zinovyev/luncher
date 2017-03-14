@@ -6,7 +6,6 @@ FactoryGirl.define do
       name = (course == 2 ? Faker::Beer.name : Faker::Food.ingredient)
       "#{name}-#{n}"
     end
-    organization { Organization.find(rand(4) + 2) }
 
     factory :item_with_prices do
       transient do

@@ -3,7 +3,7 @@ FactoryGirl.define do
     email { Faker::Internet.email }
     password 'password'
     name { Faker::Name.name }
-    username { Faker::Hipster.word }
-    organization { Organization.find(rand(4) + 2) }
+    username { Faker::Hipster.unique.word }
+    organization { Organization.find(rand(2) + 2) }
   end
 end
