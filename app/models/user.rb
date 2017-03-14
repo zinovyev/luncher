@@ -4,7 +4,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_many :orders
+  has_many :orders, dependent: :delete_all
   belongs_to :organization, inverse_of: :users
   validates :name, presence: true
   validates :username, presence: true, uniqueness: true
