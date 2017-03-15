@@ -12,7 +12,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  devise :omniauthable, :omniauth_providers => [:google_oauth2]
+  devise :omniauthable, omniauth_providers: [:google_oauth2]
 
   def active_for_authentication?
     super && (approved? || lunches_admin?)
@@ -47,14 +47,14 @@ class User < ApplicationRecord
 
     def from_omniauth(auth)
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-        user = fill_from_omniauth(user, auth)
+        fill_from_omniauth(user, auth)
       end
     end
 
     def fill_from_omniauth(resource, auth)
       resource.email = auth.info.email
-      resource.password = Devise.friendly_token[0,20]
-      resource.name = auth.info.name   # assuming the user model has a name
+      resource.password = Devise.friendly_token[0, 20]
+      resource.name = auth.info.name # assuming the user model has a name
       resource.username = auth.info.email
       resource
     end
