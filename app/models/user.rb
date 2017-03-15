@@ -7,12 +7,13 @@ class User < ApplicationRecord
   validates :organization, presence: true
   validates_with PublicOrganizationValidator
   before_validation :become_admin
+  scope :admins, -> { where lunches_admin: true }
+  scope :admin, -> { admins.limit(1) }
+  scope :active, -> { where('approved = TRUE OR lunches_admin = TRUE').all }
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-  devise :omniauthable, omniauth_providers: [:google_oauth2]
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, omniauth_providers: [:google_oauth2]
 
   def active_for_authentication?
     super && (approved? || lunches_admin?)
@@ -20,21 +21,18 @@ class User < ApplicationRecord
 
   private
 
-  # rubocop:disable Style/GuardClause
   def become_admin
-    unless admin_exists?
-      self.organization = Organization.find(1)
-      self.lunches_admin = true
-      self.approved = true
-    end
-  end
-  # rubocop:enable Style/GuardClause
-
-  def admin_exists?
-    User.unscoped.where(lunches_admin: true).count.positive?
+    return false if User.admin_exists?
+    self.organization = Organization.find(1)
+    self.lunches_admin = true
+    self.approved = true
   end
 
   class << self
+    def admin_exists?
+      User.unscoped.admin.present?
+    end
+
     def list_public(organization_id, &_block)
       list = where(lunches_admin: false, organization_id: organization_id)
       if block_given?

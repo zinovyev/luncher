@@ -4,7 +4,7 @@ FactoryGirl.define do
     photo nil
     sequence(:title) do |n|
       name = (course == 2 ? Faker::Beer.name : Faker::Food.ingredient)
-      "#{name}-#{rand(1000) + n}"
+      "#{name}-#{n}"
     end
 
     factory :item_with_prices do
