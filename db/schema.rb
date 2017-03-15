@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 20170315045241) do
     t.string   "username"
     t.boolean  "lunches_admin",          default: false
     t.integer  "organization_id"
-    t.boolean  "approved",               default: false
+    t.boolean  "approved"
     t.string   "provider"
     t.string   "uid"
     t.index ["approved", "organization_id"], name: "index_users_on_approved_and_organization_id", using: :btree
