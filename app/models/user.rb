@@ -31,7 +31,7 @@ class User < ApplicationRecord
   # rubocop:enable Style/GuardClause
 
   def admin_exists?
-    User.where(lunches_admin: true).count.positive?
+    User.unscoped.where(lunches_admin: true).count.positive?
   end
 
   class << self
