@@ -20,7 +20,7 @@ admin = User.create(
 )
 
 [google, yandex, meduza].each do |organization|
-  5.times do |i|
+  3.times do |i|
     name = Faker::Name.name
     User.create(
       name: name,
@@ -33,7 +33,7 @@ admin = User.create(
 end
 
 items = []
-50.times do |i|
+20.times do |i|
   items << Item.create(
     title: Faker::Food.ingredient,
     course: rand(3).ceil,
@@ -43,7 +43,7 @@ end
 
 weekly_menu = WeeklyMenu::WeeklyMenu.new
 prices = []
-1000.times do |i|
+5.times do |i|
   prices << Price.create(
     item: items.sample,
     organization: Organization.list_public.sample,
