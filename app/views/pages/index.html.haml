@@ -1,4 +1,13 @@
-.jumbotron
-  %h1 Welcome to Luncher!
-  %a{id: 'login_main', href: "#{new_user_session_path}", class: 'btn btn-primary btn-lg'} Log In
-  %a{id: 'sign_up_main', href: "#{new_user_registration_path}", class: 'btn btn-success btn-lg'} Sign Up
+.jumbotron{class: 'text-center'}
+  .page-header
+    %h1
+      %small Welcome to
+      Luncher!
+  %p A simple app for ordering lunches for your organization.
+
+  %a{id: 'login_main',
+    href: "#{new_user_session_path}",
+    class: 'btn btn-primary btn-lg btn-block'} Log In
+  %a{id: 'sign_up_main',
+    href: "#{new_user_registration_path}",
+    class: 'btn btn-success btn-lg btn-block'} Sign Up
