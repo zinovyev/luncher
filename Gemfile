@@ -19,6 +19,10 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'will_paginate', '~> 3.1.1'
 gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
 gem 'rails-jquery-autocomplete', '~> 1.0', '>= 1.0.2'
+gem 'dotenv', '~> 2.2'
+gem 'dotenv-rails', '~> 2.2'
+gem 'omniauth-google-oauth2', '~> 0.4.1'
+gem 'activerecord-session_store', '~> 1.0'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets

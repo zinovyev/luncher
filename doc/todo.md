@@ -23,8 +23,8 @@
 
 ## Additional features
 
-* Add organizations
-* Google Apps registration
+* ~~Add organizations~~
+* ~~Google Apps registration~~
 * ~~Auto suggest for menu itemsi~~
 * ~~Weekly menus~~
 

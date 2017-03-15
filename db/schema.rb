@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170313092113) do
+ActiveRecord::Schema.define(version: 20170315045241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,15 @@ ActiveRecord::Schema.define(version: 20170313092113) do
     t.integer "price_id", null: false
   end
 
+  create_table "sessions", force: :cascade do |t|
+    t.string   "session_id", null: false
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
+    t.index ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
@@ -76,6 +85,8 @@ ActiveRecord::Schema.define(version: 20170313092113) do
     t.boolean  "lunches_admin",          default: false
     t.integer  "organization_id"
     t.boolean  "approved",               default: false
+    t.string   "provider"
+    t.string   "uid"
     t.index ["approved", "organization_id"], name: "index_users_on_approved_and_organization_id", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["organization_id"], name: "index_users_on_organization_id", using: :btree

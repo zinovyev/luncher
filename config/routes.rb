@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
   root 'pages#index'
 
-  devise_for :user, controllers: { registrations: 'registrations' }
+  devise_for :user, controllers: {
+    registrations: 'registrations',
+    omniauth_callbacks: 'users/omniauth_callbacks',
+    # skip: :destroy_user_session
+  }
+  # devise_scope :user do
+    # delete 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
+  # end
+
   match 'login', to: 'devise/sessions#new', via: :get
   match 'logout', to: 'devise/sessions#destroy', via: :delete
   match 'sign_up', to: 'devise/registrations#new', via: :get
