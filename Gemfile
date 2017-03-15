@@ -22,6 +22,7 @@ gem 'rails-jquery-autocomplete', '~> 1.0', '>= 1.0.2'
 gem 'dotenv', '~> 2.2'
 gem 'dotenv-rails', '~> 2.2'
 gem 'omniauth-google-oauth2', '~> 0.4.1'
+gem 'faker', '~> 1.7', '>= 1.7.3'
 gem 'activerecord-session_store', '~> 1.0'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
@@ -55,7 +56,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5', '>= 3.5.2'
   gem 'capybara', '~> 2.12', '>= 2.12.1'
   gem 'factory_girl_rails', '~> 4.8'
-  gem 'faker', '~> 1.7', '>= 1.7.3'
   gem 'pry-rails', '~> 0.3.5'
   gem 'pry-byebug', '~> 3.4', '>= 3.4.2'
 end
