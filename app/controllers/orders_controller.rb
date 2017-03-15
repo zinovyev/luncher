@@ -34,7 +34,7 @@ class OrdersController < ApplicationController
       'DATE(created_at) = :date AND user_id = :user_id',
       date: date, user_id: current_user.id
     ).eager_load(:main_course, :first_course, :drink).first ||
-    Order.create(user: current_user, created_at: date)
+      Order.create(user: current_user, created_at: date)
   end
 
   def select_price_params
