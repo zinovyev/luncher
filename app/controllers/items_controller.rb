@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   before_action :convert_course, only: :create
 
   def index
-    @items = Item.all
+    @items = Item.paginate(page: params[:page], per_page: 10)
   end
 
   def new

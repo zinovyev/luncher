@@ -2,10 +2,11 @@ require 'calendar/weekday'
 
 module Calendar
   class Calendar
-    attr_reader :date
+    attr_accessor :date, :organization
 
-    def initialize
+    def initialize(organization)
       self.date = Time.zone.today
+      @organization = organization
     end
 
     def paginate(page = nil)
@@ -32,6 +33,7 @@ module Calendar
     def table_days
       table = []
       days = list_days
+      prices = ordered_prices
       (1..weeks_in_month).each_with_index do |week_num|
         week = []
         (1..7).each do |wday|
@@ -39,7 +41,8 @@ module Calendar
             week << nil
           else
             day = days.shift
-            week << Weekday.new(date.year, date.month, day) if day
+            day_prices = prices[date.to_s] || []
+            week << Weekday.new(date, day, day_prices) if day
           end
         end
         table << week
@@ -54,16 +57,36 @@ module Calendar
 
     private
 
+    def ordered_prices
+      Price
+        .order(:date)
+        .where(date: first_day_of_month..last_day_of_month)
+        .reduce({}) do |acc, price|
+          date = price.date.to_s
+          acc[date] = [] unless acc[date]
+          acc[date] << price
+          acc
+        end
+    end
+
+    def first_day_of_month(date = self.date)
+      Date.new(date.year, date.month, 1)
+    end
+
+    def last_day_of_month
+      Date.new(date.year, date.month, -1)
+    end
+
     def normalize_page(page)
       page.positive? ? page - 1 : page
     end
 
     def normalize_date(date)
-      Date.new(date.year, date.month, 1)
+      first_day_of_month(date)
     end
 
     def days_in_month
-      Date.new(date.year, date.month, -1).mday
+      last_day_of_month.mday
     end
 
     def weeks_in_month
