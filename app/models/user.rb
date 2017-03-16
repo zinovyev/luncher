@@ -44,12 +44,15 @@ class User < ApplicationRecord
     end
 
     def from_omniauth(auth)
+      binding.pry
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
         fill_from_omniauth(user, auth)
       end
     end
 
     def fill_from_omniauth(resource, auth)
+      resource.uid = auth.uid
+      resource.provider = auth.provider
       resource.email = auth.info.email
       resource.password = Devise.friendly_token[0, 20]
       resource.name = auth.info.name # assuming the user model has a name
