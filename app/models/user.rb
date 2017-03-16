@@ -44,7 +44,6 @@ class User < ApplicationRecord
     end
 
     def from_omniauth(auth)
-      binding.pry
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
         fill_from_omniauth(user, auth)
       end
