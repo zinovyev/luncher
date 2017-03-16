@@ -34,15 +34,17 @@ module Calendar
       table = []
       days = list_days
       prices = ordered_prices
+      current_date = first_day_of_month
       (1..weeks_in_month).each_with_index do |week_num|
         week = []
         (1..7).each do |wday|
-          if 1 == week_num && wday <= first_weekday && !days.empty?
+          if 1 == week_num && wday <= first_weekday && days.present?
             week << nil
           else
             day = days.shift
-            day_prices = prices[date.to_s] || []
-            week << Weekday.new(date, day, day_prices) if day
+            day_prices = prices[current_date.to_s] || []
+            week << Weekday.new(current_date, day, day_prices) if day
+            current_date += 1
           end
         end
         table << week
