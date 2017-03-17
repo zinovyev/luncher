@@ -30,6 +30,6 @@
 
 ## Refactoring
 
-* Refactoring
+* ~~Refactoring~~
 * Refactoring
 * Refactoring
