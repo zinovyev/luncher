@@ -10,10 +10,14 @@ FactoryGirl.define do
     factory :item_with_prices do
       transient do
         prices_count 5
+        prices_organization { Organization.find(rand(2) + 2) }
       end
 
       after(:create) do |item, evaluator|
-        create_list(:price, evaluator.prices_count, item: item)
+        create_list(:price,
+                    evaluator.prices_count,
+                    organization: evaluator.prices_organization,
+                    item: item)
       end
     end
 
@@ -21,6 +25,7 @@ FactoryGirl.define do
       transient do
         prices_count 5
         prices_date Time.zone.today
+        prices_organization { Organization.find(rand(2) + 2) }
       end
 
       after(:create) do |item, evaluator|
@@ -28,6 +33,7 @@ FactoryGirl.define do
           :price,
           evaluator.prices_count,
           date: evaluator.prices_date,
+          organization: evaluator.prices_organization,
           item: item
         )
       end
@@ -36,10 +42,15 @@ FactoryGirl.define do
     factory :item_with_today_prices do
       transient do
         prices_count 5
+        prices_organization { Organization.find(rand(2) + 2) }
       end
 
       after(:create) do |item, evaluator|
-        create_list(:price, evaluator.prices_count, :today_price, item: item)
+        create_list(:price,
+                    evaluator.prices_count,
+                    :today_price,
+                    organization: evaluator.prices_organization,
+                    item: item)
       end
     end
   end
