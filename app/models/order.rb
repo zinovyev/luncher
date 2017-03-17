@@ -5,7 +5,9 @@ class Order < ApplicationRecord
   belongs_to :drink, class_name: 'Price', optional: true
 
   def to_s
-    "#{first_course&.title}, #{main_course&.title}, #{drink&.title}"
+    [first_course&.title, main_course&.title, drink&.title]
+      .reject(&:nil?)
+      .join(', ')
   end
 
   def add_course(price)

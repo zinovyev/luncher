@@ -17,7 +17,7 @@
     - @weekly_menu.price_rows do |row|
       %tr
         - row.each do |price|
-          %td
+          %td{class: 'price-cell'}
             - if price
               %b= price.title
               \:

@@ -5,10 +5,6 @@ class OrdersController < ApplicationController
 
   before_action :require_admin, only: [:index]
 
-  def index
-    @orders = Order.all
-  end
-
   def new
     @date = Date.parse params[:date]
     @order = get_order(@date)
