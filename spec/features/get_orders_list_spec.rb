@@ -6,6 +6,6 @@ describe 'orders page in admin panel' do
     user = create(:user)
     sign_in user
 
-    visit orders_path
+    visit admin_orders_path
   end
 end

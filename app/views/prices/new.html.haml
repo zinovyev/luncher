@@ -1,9 +1,0 @@
-%h1 Add New Price
-
-= render 'shared/error', object: @price
-
-= simple_form_for @price do |f|
-  = f.input :item_id, collection: Price.available_items
-  = f.input :value
-  = f.button :submit
-

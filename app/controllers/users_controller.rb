@@ -2,7 +2,7 @@ require 'calendar/calendar'
 
 class UsersController < ApplicationController
   def dashboard
-    @calendar = Calendar::Calendar.new
+    @calendar = Calendar::Calendar.new(current_user.organization)
     @calendar.paginate(invert_page)
   end
 

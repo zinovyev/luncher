@@ -3,14 +3,14 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   it 'is should be able to be saved with valid attributes' do
     first_user = build(:user)
-    expect(first_user.send(:admin_exists?)).to eq false
+    expect(User.admin_exists?).to eq false
     expect(first_user.lunches_admin?).to eq false
     first_user.save
     expect(first_user.valid?).to eq true
     expect(first_user.lunches_admin?).to eq true
 
     second_user = build(:user)
-    expect(second_user.send(:admin_exists?)).to eq true
+    expect(User.admin_exists?).to eq true
     expect(second_user.lunches_admin?).to eq false
     second_user.save
     expect(second_user.valid?).to eq true

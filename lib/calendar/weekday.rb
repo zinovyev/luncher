@@ -1,19 +1,23 @@
 module Calendar
   class Weekday
-    attr_reader :year, :month, :day
+    attr_accessor :prices
+    attr_reader :day, :date
+    delegate :yead, :month, to: :date
 
-    def initialize(year, month, day)
-      @year = year
-      @month = month
+    def initialize(date, day, prices = nil)
       @day = day
-    end
-
-    def date
-      Date.new(@year, @month, @day)
+      @date = date
+      @prices = prices
     end
 
     def prices
-      @prices ||= Price.where(
+      @prices ||= fetch
+    end
+
+    private
+
+    def fetch
+      Price.where(
         'date = :date',
         date: "#{year}-#{month}-#{day}"
       )

@@ -1,19 +1,26 @@
 %h1= "Hello, #{current_user.name} (#{@calendar.month_title})"
-%table{class: 'table table-striped table-hover text-center dashboard-calendar'}
-  %thead
-    %tr
-      - @calendar.days_table_header.each do |day|
-        %td= day
-  %tbody
-    - @calendar.table_days.each do |week|
-      %tr
-        - week.each do |day|
-          - if day
-            - if day.prices.count.positive?
-              %td{class: 'success'}
-                %a{href: "#{new_order_path(day.date)}", style: 'display: block'}= day.day
-            - else
-              %td= day.day
-          - else
-            %td &nbsp;
-= render 'menu', page: @page
+
+.panel.panel-default
+  .panel-heading
+    Menu for:
+    %b #{current_user.organization.title}
+  .panel-body.row
+
+    %table{class: 'table table-striped table-hover text-center dashboard-calendar'}
+      %thead
+        %tr
+          - @calendar.days_table_header.each do |day|
+            %td= day
+      %tbody
+        - @calendar.table_days.each do |week|
+          %tr
+            - week.each do |day|
+              - if day
+                - if day.prices.count.positive?
+                  %td{class: 'success'}
+                    %a{href: "#{new_order_path(day.date)}", style: 'display: block'}= day.day
+                - else
+                  %td= day.day
+              - else
+                %td &nbsp;
+    = render 'menu', page: @page

@@ -2,13 +2,13 @@ require 'calendar/calendar'
 
 RSpec.describe Calendar::Calendar do
   let(:c1) do
-    c1 = Calendar::Calendar.new
+    c1 = Calendar::Calendar.new Organization.common.first
     c1.date = Date.new(2017, 1, 15)
     c1
   end
 
   let(:c2) do
-    c2 = Calendar::Calendar.new
+    c2 = Calendar::Calendar.new Organization.common.first
     c2.date = Date.new(2015, 2, 28)
     c2
   end

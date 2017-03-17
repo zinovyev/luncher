@@ -1,44 +1,39 @@
 = devise_error_messages!
-.field
+.field.form-group
   = f.label :name
-  %br/
-  = f.text_field :name, autofocus: true
-.field
+  = f.text_field :name, autofocus: true, class: 'form-control'
+.field.form-group
   = f.label :username
-  %br/
-  = f.text_field :username
-.field
+  = f.text_field :username, class: 'form-control'
+.field.form-group
   = f.label :email
-  %br/
-  = f.email_field :email
+  = f.email_field :email, class: 'form-control'
 
 - if local_assigns[:organization_select]
-  .field
+  .field.form-group
     = f.label :organization
-    %br/
     = f.collection_select(:organization_id,
                           Organization.list_public,
                           :id,
                           :title)
 
 - if local_assigns[:select_approved]
-  .field
+  .field.form-group
     = f.label :approved
-    %br/
     = f.check_box :approved
 
 - if current_page?(new_user_registration_path)
-  .field
+  .field.form-group
     = f.label :password
     - if @minimum_password_length
       %em
         (#{@minimum_password_length} characters minimum)
-    %br/
-    = f.password_field :password, autocomplete: "off"
-  .field
+    = f.password_field :password, autocomplete: "off", class: 'form-control'
+  .field.form-group
     = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "off"
+    = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
 
-.actions
-  = f.submit local_assigns[:submit_text]
+.actions.form-group
+  = f.submit local_assigns[:submit_text], class: 'btn btn-primary'
+  - if local_assigns[:shared_links]
+    = render 'devise/shared/links'

@@ -6,13 +6,20 @@ describe 'add today prices process' do
     user = create(:user)
     sign_in user
 
-    create_list(:item_with_prices, 55, prices_count: 5)
-    create_list(:item_with_today_prices, 5, prices_count: 1)
+    organization = Organization.common.first
+    create_list(:item_with_prices,
+                55,
+                prices_count: 5,
+                prices_organization: organization)
+    create_list(:item_with_today_prices,
+                5,
+                prices_count: 1,
+                prices_organization: organization)
 
-    visit prices_path
-    expect(page).to have_current_path(prices_path)
-    expect(page).to have_content('Today Menu')
-    page.assert_selector('.price-row', count: 5)
+    visit admin_organization_path(organization)
+    expect(page).to have_current_path(admin_organization_path(organization))
+    expect(page).to have_content(organization.title)
+    page.assert_selector('.price-cell')
   end
 
   it 'lets me delete or modify a price' do
