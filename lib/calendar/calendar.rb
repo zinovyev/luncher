@@ -66,11 +66,10 @@ module Calendar
           date: first_day_of_month..last_day_of_month,
           organization: @organization
         )
-        .reduce({}) do |acc, price|
+        .each_with_object({}) do |price, acc|
           date = price.date.to_s
           acc[date] = [] unless acc[date]
           acc[date] << price
-          acc
         end
     end
 

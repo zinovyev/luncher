@@ -1,20 +1,13 @@
 module Calendar
   class Weekday
     attr_accessor :prices
-    attr_reader :year, :month, :day, :date
+    attr_reader :day, :date
+    delegate :yead, :month, to: :date
 
     def initialize(date, day, prices = nil)
       @day = day
       @date = date
       @prices = prices
-    end
-
-    def year
-      date.year
-    end
-
-    def month
-      date.month
     end
 
     def prices

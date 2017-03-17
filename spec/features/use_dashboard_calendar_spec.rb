@@ -87,7 +87,7 @@ describe 'dashboard calendar' do
     ).to_s)
     expect(page).to have_content("(#{order_summary})")
 
-    find_link('To Dashboard').click
+    find_link('Back').click
     expect(page).to have_current_path(dashboard_path)
   end
 end
