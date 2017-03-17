@@ -62,7 +62,10 @@ module Calendar
     def ordered_prices
       Price
         .order(:date)
-        .where(date: first_day_of_month..last_day_of_month)
+        .where(
+          date: first_day_of_month..last_day_of_month,
+          organization: @organization
+        )
         .reduce({}) do |acc, price|
           date = price.date.to_s
           acc[date] = [] unless acc[date]

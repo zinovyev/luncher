@@ -10,6 +10,7 @@
         %td User
         %td Items
         %td Sum
+        %td Organization
         %td Date
     %tbody
       - @orders.each do |order|
@@ -19,4 +20,5 @@
             %td= order.user.name
             %td= order
             %td= order.summary
+            %td= order.user.organization
             %td= order.created_at.to_date
